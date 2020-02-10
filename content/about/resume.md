@@ -1,9 +1,19 @@
 ---
 title: "about"
-date: 2020-02-02
+date: 2020-02-10
 layout: about
 ---
 
-## About Me
+# About Me
 
-_Thank you for reading my resume. If you want to contact me, Please send me an email._
+## Woomin Jeon
+
+### Software Developer
+
+Mail : dal96k@gmail.com
+KonKuk University School of Business Student
+Seoul , Korea
+
+Book ↓
+  그림으로 배우는 네트워크 구조
+  

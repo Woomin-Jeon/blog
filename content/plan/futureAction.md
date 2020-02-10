@@ -1,14 +1,14 @@
 ---
 title: "plan"
-date: 2020-02-02
+date: 2020-02-10
 layout: plan
 ---
 
-## Future Action Plan 🤔💡
+## Future Action Plan
 
-- Every morning, solve the algorithm problem
-- Read 50 pages every day
+- Algorithm TDD 꾸준하게 포스팅
+- 최대한 기록하기
 
-## Feedback 📝
+## Feedback
 
-- 열심히 하기.
+- (None)

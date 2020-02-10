@@ -1,18 +1,18 @@
 module.exports = {
-  title: `Answer.dev`, // Your blog title
+  title: `Jeon Woomin`, // Your blog title
   description: `Relax and Reflect`, // Your blog description
-  author: `Park Answer`,
-  introduction: `Welcome! This is Answer's Dev Blog`,
+  author: `Jeon Woomin`,
+  introduction: `Welcome! This is Woomin's Dev Blog`,
   siteUrl: `http://answer.netlify.com/`, // Your blog site url
   social: [
     //You can find and use icons on the https://fontawesome.com/icons?d=gallery&s=brands
     {
       icon: `github`,
-      url: `https://github.com/passwd10`,
+      url: `https://github.com/Woomin-Jeon`,
     },
     {
       icon: `google`,
-      url: `https://inseo9494@gmail.com`,
+      url: `https://dal96k@gmail.com`,
     },
   ],
   icon: `content/assets/icon.png`, // Your blog icon
