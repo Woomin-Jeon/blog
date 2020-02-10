@@ -11,4 +11,4 @@ layout: plan
 
 ## Feedback 📝
 
-- ~~Don't watch YouTube before you go to sleep.~~ 👉 I got a good night's sleep.
+- 열심히 하기.
