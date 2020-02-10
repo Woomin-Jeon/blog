@@ -17,9 +17,9 @@ module.exports = {
   ],
   icon: `content/assets/icon.png`, // Your blog icon
   planTitle: `Future Action Plan`, // Your blog planTitle
-  showPlan: true, //If you don't want to see the plan, change the status to false.
+  showPlan: false, //If you don't want to see the plan, change the status to false.
   comment: {
-    disqusShortName: "passwd10", // Your disqus-short-name. check disqus.com.
+    disqusShortName: "woomin", // Your disqus-short-name. check disqus.com.
   },
-  ga: "UA-149433358-1", // Add your google analytics tranking ID
+  ga: "", // Add your google analytics tranking ID
 }
