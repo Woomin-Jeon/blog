@@ -11,6 +11,7 @@ layout: about
 KonKuk University School of Business Student  
 Seoul , Korea  
   
-읽은 책↓  
-그림으로 배우는 네트워크 구조
+Books ↓  
+그림으로 배우는 네트워크 구조  
+하루 3분 네트워크 교실
   
