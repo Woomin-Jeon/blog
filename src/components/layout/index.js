@@ -1,6 +1,7 @@
 import React from 'react'
 import Top from '../top'
 import Footer from '../footer'
+import Helmet from 'react-helmet'
 
 import './index.scss'
 
