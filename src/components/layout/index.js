@@ -1,8 +1,7 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import Top from '../top'
 import Footer from '../footer'
-
+import Helmet from 'react-helmet'
 
 import './index.scss'
 
@@ -14,9 +13,11 @@ export const Layout = ({ children, title }) => (
         content="VmeGeaZRbqOCkoWwgWz5El0rxRMsVySfB86qXilV8k8" />
     </Helmet>
     <Top title={title} />
-    <div className="layout-body">{children}</div>
+    <div className='layout-body'>
+      {children}
+    </div>
     <Footer />
   </>
 )
 
-export default Layout
+export default Layout;
