@@ -10,7 +10,7 @@ export const Layout = ({ children, title }) => (
     <Helmet>
       <meta 
         name="google-site-verification"
-        content="VmeGeaZRbqOCkoWwgWz5El0rxRMsVySfB86qXilV8k8" />
+        content="Aa8CClY8ecD9Uc-kAaZulu_ZvifUABxOsWtHrPEz3OY" />
     </Helmet>
     <Top title={title} />
     <div className='layout-body'>
