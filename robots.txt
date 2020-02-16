@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://woogod.netlify.com/sitemap.xml
