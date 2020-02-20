@@ -14,7 +14,6 @@ export const Layout = ({ children, title }) => (
       {/* <meta 
         name="google-site-verification"
         content="Aa8CClY8ecD9Uc-kAaZulu_ZvifUABxOsWtHrPEz3OY" /> */}
-
     </Helmet>
     <Top title={title} />
     <div className='layout-body'>
