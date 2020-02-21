@@ -312,8 +312,8 @@ let example3 = arr.shift(); // 배열 맨 앞에 있는 항목 제거: banana
 let example4 = arr.unshift('melon'); // 배열 맨 앞에 항목 추가: melon banana
 let example5 = arr.indexOf('banana'); // 배열에서 해당되는 항목의 인덱스 찾기: 1
 let example6 = arr.push('orange'); // melon banana orange
-let example7 = arr.splice(1,2); // 인덱스 1에서부터 2개만큼 제거: melon
-let example8 = arr.slice(1,2); // 인덱스 1에서부터 2개만큼 제거: melon
+let example7 = arr.splice(1, 2); // 인덱스 1에서부터 2개만큼 제거: melon
+let example8 = arr.slice(i, j); // 인덱스 i에서부터 인덱스 j 전까지 제거
 ```
 
 cf) slice와 splice의 차이: slice는 원본 배열은 건들이지 않지만, splice는 원본의 요소도 제거시킨다.
