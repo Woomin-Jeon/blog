@@ -11,14 +11,14 @@ export const PostNavigator = ({ pageContext }) => {
       <span className="prev">
         {previous && (
           <Link to={previous.fields.slug} rel="prev">
-            {`<`} {previous.frontmatter.title}
+            {`←`} {previous.frontmatter.title}
           </Link>
         )}
       </span>
       <span className="next">
         {next && (
           <Link to={next.fields.slug} rel="next">
-            {next.frontmatter.title} {`>`}
+            {next.frontmatter.title} {`→`}
           </Link>
         )}
       </span>
