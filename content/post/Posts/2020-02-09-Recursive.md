@@ -61,3 +61,38 @@ const FactorialTailRecursive = (n, res) => {
 ```
 
 꼬리재귀에서 주의할 점은 이 꼬리재귀가 코드 상에서 위의 스택 문제를 해결해주는 것이 아니라, 컴파일러가 꼬리재귀를 인식하고 코드를 최적화 해줌으로써 일반재귀가 가지는 문제점을 해결해주는 것이므로, 최적화를 시켜주는 컴파일러인지 확인 하고 사용해야 한다.
+
+### 피보나치 수열 예시
+
+일반 재귀
+
+```javascript
+const solution = (n) => {
+  return Fibonacci(n);
+};
+
+const Fibonacci = (n) => {
+  if (n === 0) {
+    return 0;
+  } else if (n === 1) {
+    return 1;
+  } else {
+    return Fibonacci(n-1) + Fibonacci(n-2);
+  }
+};
+```
+
+꼬리 재귀
+
+```javascript
+const solution = (n) => {
+  return Fibonacci(n, 0, 1);
+};
+
+const Fibonacci = (n, before, next) =>{
+  if (n == 0)
+    return before;
+  else
+    return Fibonacci(n - 1, next, before + next);
+};
+```
