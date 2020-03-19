@@ -26,9 +26,14 @@ layout: about
 
 #### 경험 기술
 
-> **Language** 　 　 C / JavaScript  
-**FrontEnd**　　　HTML / CSS / ReactJS / Webpack / Babel  
-**Use** 　　　 　　 Linux / Git / Jest / Npm  
+> **Language**  
+.　　　　 C / JavaScript  
+**FrontEnd**  
+.　　　　 HTML / CSS / ReactJS / Webpack / Babel  
+**BackEnd**  
+.　　　　 Express / MongoDB  
+**Use**  
+.　　　　 Linux / Git / Jest / Npm / Docker  
 
 <br>
 
