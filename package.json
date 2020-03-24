@@ -59,7 +59,7 @@
   "devDependencies": {
     "eslint": "^5.14.1",
     "eslint-plugin-react": "^7.11.1",
-    "gatsby-plugin-feed": "^2.3.27",
+    "gatsby-plugin-feed": "^2.4.1",
     "prettier": "^1.19.1"
   },
   "repository": {
