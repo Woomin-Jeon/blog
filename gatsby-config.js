@@ -40,7 +40,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `passwd10`,
+        shortname: `woomin`,
       },
     },
     {
