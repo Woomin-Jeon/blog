@@ -13,7 +13,7 @@ layout: about
 #### 주소
 
 > **GitHub** 　　 <https://github.com/Woomin-Jeon>  
-**Blog** 　 　　 <https://woogod.netlify.com>  
+**Blog** 　 　　 <https://woomin.netlify.com>  
 **Mail** 　 　 　 <dal96k@hanmail.net>  
 
 <br>
