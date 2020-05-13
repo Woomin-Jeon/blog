@@ -42,6 +42,7 @@ tag: [Posts]
   5. EC2에 접속해서 aws-cli를 설치하고, 설정을 시작한다.
 
       ```code
+      $ apt-get update
       $ apt install awscli
       $ aws configure
       -----------------------
@@ -56,19 +57,22 @@ tag: [Posts]
       ```code
       $ wget https://aws-codedeploy-ap-northeast-2.s3.amazonaws.com/latest/install
       $ chmod +x ./install
-      $ ./install auto (만약 에러가 발생한다면 ruby를 설치한 뒤 다시 해본다)
+      $ apt-get install ruby
+      $ ./install auto
       ```
   
   7. 설치가 완료되었는지 확인해본다.
 
       ```code
       $ service codedeploy-agent status
+      => The AWS CodeDeploy agent is running as PID ****
       ```
   
   8. EC2 인스턴스가 부팅되면 자동으로 AWS CodeDeploy Agent가 실행될 수 있도록 /etc/init.d/에 쉘 스크립트 파일을 하나 생성하고 아래 내용을 추가한다. 그리고 실행 권한을 추가한다.
 
       ```code
-      vim /etc/init.d/codedeploy-startup.sh
+      $ apt-get install vim
+      $ vim /etc/init.d/codedeploy-startup.sh
       ```
 
       ```code
