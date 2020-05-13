@@ -8,10 +8,7 @@ import './index.scss'
 export const Layout = ({ children, title }) => (
   <>
     <Helmet>
-      <meta
-        name="naver-site-verification"
-        content="70accc2cfef2670418eeafae9176049c3353e2a7"/>
-      <meta name="google-site-verification" content="Aa8CClY8ecD9Uc-kAaZulu_ZvifUABxOsWtHrPEz3OY" />
+      <meta name="google-site-verification" content="nqKk1qa0fFdufoYINoIqIgkDZOIFMyAOGir7cqK4BL8" />
     </Helmet>
     <Top title={title} />
     <div className='layout-body'>
