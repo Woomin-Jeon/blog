@@ -70,7 +70,7 @@ tag: [Posts]
   6. 설정이 완료되었다면 CodeDeploy Agent를 설치한다.
 
       ```code
-      $ wget https://aws-codedeploy-ap-northeast-2.s3.amazonaws.com/latest/install
+      $ wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
       $ chmod +x ./install
       $ apt-get install ruby
       $ ./install auto
@@ -78,14 +78,13 @@ tag: [Posts]
   
 <br />
 
-  7. 설치가 완료되었는지 확인해본다.
+  7. 설치가 완료된 뒤 실행해본다.
 
       ```bash
+      $ service codedeploy-agent start
       $ service codedeploy-agent status
 
       # Active : active (exited)라고 떠야 재대로 작동하는 것이다.
-      # 만약 inactive라고 뜬다면,
-      # $ service codedeploy-agent start 명령어를 실행한다.
       ```
   
 <br />
@@ -162,7 +161,7 @@ tag: [Posts]
 
 <br />
 
-  12. AWS IAM으로 이동해서 역할을 생성한다.
+  12. AWS IAM으로 이동해서 CodeDeploy에 대한 역할을 생성한다.
       - "AWS 서비스" 선택
       - 서비스로 "CodeDeploy" 선택
       - "연결된 권한 정책" (넘어간다)
@@ -170,15 +169,31 @@ tag: [Posts]
 
 <br />
 
-  13. AWS CodeDeploy로 이동하여 애플리케이션을 생성한다.
+  13. AWS IAM으로 이동해서 EC2에 대한 역할을 생성한다.
+      - "AWS 서비스" 선택
+      - 서비스로 "EC2" 선택
+      - 총 4개의 정책을 선택  
+          - "AmazonS3FullAccess"  
+          - "AWSCodeDeployFullAccess"  
+          - "AWSCodeDeployRole"  
+          - "CloudWatchLogsFullAccess"  
+      - "검토"에서 역할 이름과 역할 설명 작성
+
+<br />
+
+  14. AWS EC2 인스턴스 대쉬보드로 이동하여 "인스턴스 설정"에서 "IAM 역할 연결/바꾸기"를 누른 뒤, 13에서 만들 역할을 설정해준다.
+
+<br />
+
+  15. AWS CodeDeploy로 이동하여 애플리케이션을 생성한다.
       - 애플리케이션 이름 작성
       - 컴퓨팅 플랫폼 (EC2/온프로미스)
 
 <br />
 
-  14. 해당 애플리케이션의 배포그룹을 생성한다.
+  16. 해당 애플리케이션의 배포그룹을 생성한다.
       - 배포그룹 이름 입력
-      - 서비스 역할 입력 (아까 작성하였던 것)
+      - 서비스 역할 입력 (12에서 작성하였던 CodeDeploy 정책)
       - 배포 유형 (현재 위치)
       - 환경 구성 (Amazon EC2 인스턴스)
         - key: Name
@@ -187,15 +202,15 @@ tag: [Posts]
   
 <br />
 
-  15. AWS EC2 instance로 이동하여 "태그" 탭 클릭 후, 태그를 아까 적어놓았던 key, value로 설정한다.
+  17. AWS EC2 instance로 이동하여 "태그" 탭 클릭 후, 태그를 아까 적어놓았던 key, value로 설정한다.
   
 <br />
 
-  16. 이제 1개의 일치하는 고유 인스턴스라고 뜰 것이다. 로드밸런서는 할줄 모르니까 설정하지 않는다.
+  18. 이제 1개의 일치하는 고유 인스턴스라고 뜰 것이다. 로드밸런서는 할줄 모르니까 설정하지 않는다.
   
 <br />
   
-  17. 해당 애플리케이션으로 이동해서 "배포" 탭에서 "배포만들기"를 한다.<br />
+  19. 해당 애플리케이션으로 이동해서 "배포" 탭에서 "배포만들기"를 한다.<br />
 　　｡　배포 그룹 설정<br />
 　　｡　개정 유형 (애플리케이션을 GitHub에 저장)<br />
 　　｡　GitHub 토큰 이름을 알아서 작성하고 GitHub와 연결<br />
@@ -205,4 +220,13 @@ tag: [Posts]
 
 <br />
 
-  18. 여기까지가 Local에서 작성한 코드를 GitHub에 push하였을 때, 그 코드를 EC2에 아까 설치하였던 CodeDeploy Agent가 받아와서 EC2안에 설치하는 과정이다.
+  20. 여기까지가 Local에서 작성한 코드를 GitHub에 push하였을 때, 그 코드를 EC2에 아까 설치하였던 CodeDeploy Agent가 받아와서 EC2안에 설치하는 과정이다.
+
+<br />
+
+  21. 참고사항 : 문제 발생 시 CodeDeploy Agent 로그를 확인한다.
+
+      ```bash
+      # EC2 인스턴스에 접속한 뒤,
+      $ less /var/log/aws/codedeploy-agent/codedeploy-agent.log
+      ```
