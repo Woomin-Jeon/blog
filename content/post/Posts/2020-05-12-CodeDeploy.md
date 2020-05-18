@@ -92,26 +92,55 @@ tag: [Posts]
       os: linux
       files:
         - source:  /
-          destination: /home/ec2-user/build/
+          destination: /home/ubuntu/build/
+      hooks:
+        BeforeInstall:
+            - location: scripts/beforeInstall.bash
+            runas: root
+        AfterInstall:
+            - location: scripts/afterInstall.bash
+            runas: root
       ```
 
-  10. EC2에 /home/ec2-user/build/ 디렉토리를 생성한다.
+  10. appspec.yml 파일 hooks에 설정한대로 bash파일을 생성한다. 프로젝트 루트 디렉토리에 scripts라는 디렉토리를 만들고, 그 안에 beforeInstall.bash 파일과 afterInstall.bash 파일을 생성한다.
 
       ```code
-      $ mkdir /home/ec2-user/build/
+      // beforeInstall.bash
+      if [ -d /home/ubuntu/build ]; then
+          rm -rf /home/ubuntu/build
+      fi
+      mkdir -vp /home/ubuntu/build
+  
+  
+      if [[ "$(docker images -q [Docker Hub ID]/[Docker Hub Repository Name]:[version] 2> /dev/null)" != "" ]]; then
+      docker rmi -f $(docker images --format '{{.Repository}}:{{.Tag}}' --filter=reference='[Docker Hub ID]/[Docker Hub Repository Name]:[version]')
+      fi
       ```
 
-  11. AWS IAM으로 이동해서 역할을 생성한다.
+      ```code
+      cd /home/ubuntu/build
+      npm install
+      docker build -t [Docker Hub ID]/[Image Name]:[version] .
+      docker run --publish [EC2 port number]:[Docker port number] -it --detach --name [New Container Name] [Docker Hub ID]/[Image Name]:[version] /bin/bash
+      ```
+
+  11. EC2에 /home/ubuntu/build/ 디렉토리를 생성한다.
+
+      ```code
+      $ mkdir /home/ubuntu/build/
+      ```
+
+  12. AWS IAM으로 이동해서 역할을 생성한다.
       - "AWS 서비스" 선택
       - 서비스로 "CodeDeploy" 선택
       - "연결된 권한 정책" (넘어간다)
       - "검토"에서 역할 이름과 역할 설명 작성  
 
-  12. AWS CodeDeploy로 이동하여 애플리케이션을 생성한다.
+  13. AWS CodeDeploy로 이동하여 애플리케이션을 생성한다.
       - 애플리케이션 이름 작성
       - 컴퓨팅 플랫폼 (EC2/온프로미스)
 
-  13. 해당 애플리케이션의 배포그룹을 생성한다.
+  14. 해당 애플리케이션의 배포그룹을 생성한다.
       - 배포그룹 이름 입력
       - 서비스 역할 입력 (아까 작성하였던 것)
       - 배포 유형 (현재 위치)
@@ -120,13 +149,13 @@ tag: [Posts]
         - value: 원하는 대로
         - (현재 상태에서는 0개의 일치하는 고유 인스턴스라고 뜰 것이다.)
   
-  14. AWS EC2 instance로 이동하여 "태그" 탭 클릭 후, 태그를 아까 적어놓았던 key, value로 설정한다.
-  15. 이제 1개의 일치하는 고유 인스턴스라고 뜰 것이다. 로드밸런서는 할줄 모르니까 설정하지 않는다.
-  16. 해당 애플리케이션으로 이동해서 "배포" 탭에서 "배포만들기"를 한다.
+  15. AWS EC2 instance로 이동하여 "태그" 탭 클릭 후, 태그를 아까 적어놓았던 key, value로 설정한다.
+  16. 이제 1개의 일치하는 고유 인스턴스라고 뜰 것이다. 로드밸런서는 할줄 모르니까 설정하지 않는다.
+  17. 해당 애플리케이션으로 이동해서 "배포" 탭에서 "배포만들기"를 한다.
       - 배포 그룹 설정
       - 개정 유형 (애플리케이션을 GitHub에 저장)
       - GitHub 토큰 이름을 알아서 작성하고 GitHub와 연결
       - 해당 레포지토리의 이름과 가장 최근 커밋 ID를 작성
       - "콘텐츠 옵션"으로 "배포 실패" 선택
       - 롤백 비활성화
-  17. 여기까지가 Local에서 작성한 코드를 GitHub에 push하였을 때, 그 코드를 EC2에 아까 설치하였던 CodeDeploy Agent가 받아와서 EC2안에 설치하는 과정이다.
+  18. 여기까지가 Local에서 작성한 코드를 GitHub에 push하였을 때, 그 코드를 EC2에 아까 설치하였던 CodeDeploy Agent가 받아와서 EC2안에 설치하는 과정이다.
