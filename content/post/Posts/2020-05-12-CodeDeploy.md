@@ -43,7 +43,7 @@ tag: [Posts]
 
       ```code
       $ apt-get update
-      $ apt install awscli
+      $ apt-get install awscli
       $ aws configure
       -----------------------
       AWS_ACCESS_KEY 입력
@@ -65,7 +65,6 @@ tag: [Posts]
 
       ```code
       $ service codedeploy-agent status
-      => The AWS CodeDeploy agent is running as PID ****
       ```
   
   8. EC2 인스턴스가 부팅되면 자동으로 AWS CodeDeploy Agent가 실행될 수 있도록 /etc/init.d/에 쉘 스크립트 파일을 하나 생성하고 아래 내용을 추가한다. 그리고 실행 권한을 추가한다.
@@ -102,22 +101,24 @@ tag: [Posts]
             runas: root
       ```
 
-  10. appspec.yml 파일 hooks에 설정한대로 bash파일을 생성한다. 프로젝트 루트 디렉토리에 scripts라는 디렉토리를 만들고, 그 안에 beforeInstall.bash 파일과 afterInstall.bash 파일을 생성한다.
+  10. appspec.yml 파일 hooks에 설정한대로 bash파일을 생성한다. 프로젝트 루트 디렉토리에 scripts라는 디렉토리를 만들고, 그 안에 beforeInstall.bash 파일과 afterInstall.bash 파일을 생성한다.  
 
-      ```code
-      // beforeInstall.bash
+      ```bash
+      # beforeInstall.bash
+
       if [ -d /home/ubuntu/build ]; then
           rm -rf /home/ubuntu/build
       fi
-      mkdir -vp /home/ubuntu/build
-  
+      mkdir -vp /home/ubuntu/build  
   
       if [[ "$(docker images -q [Docker Hub ID]/[Docker Hub Repository Name]:[version] 2> /dev/null)" != "" ]]; then
       docker rmi -f $(docker images --format '{{.Repository}}:{{.Tag}}' --filter=reference='[Docker Hub ID]/[Docker Hub Repository Name]:[version]')
       fi
       ```
 
-      ```code
+      ```bash
+      # afterInstall.bash
+
       cd /home/ubuntu/build
       npm install
       docker build -t [Docker Hub ID]/[Image Name]:[version] .
