@@ -80,8 +80,12 @@ tag: [Posts]
 
   7. 설치가 완료되었는지 확인해본다.
 
-      ```code
+      ```bash
       $ service codedeploy-agent status
+
+      # Active : active (exited)라고 떠야 재대로 작동하는 것이다.
+      # 만약 inactive라고 뜬다면,
+      # $ service codedeploy-agent start 명령어를 실행한다.
       ```
   
 <br />
