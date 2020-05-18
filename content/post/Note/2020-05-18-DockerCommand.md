@@ -4,13 +4,17 @@ date: 2020-05-18
 tag: ["Note"]
 ---
 
-## Dockerfile로 이미지 빌드하기
+<br />
+
+#### Dockerfile로 이미지 빌드하기
 
 ```bash
 $ docker build -t [Docker Hub ID]/[Image Name]:[version] .
 ```
 
-## 컨테이너 실행하기
+<br />
+
+#### 컨테이너 실행하기
 
 ```bash
 $ docker run --publish [Local Port Number]:[Docker Port Number] -it --detach --name [New Container Name] [Image Name] /bin/bash
@@ -18,19 +22,25 @@ $ docker run --publish [Local Port Number]:[Docker Port Number] -it --detach --n
 # 예를 들면, dal96k/myImage:v1
 ```
 
-## 실행중인 컨테이너에 접속하기
+<br />
+
+#### 실행중인 컨테이너에 접속하기
 
 ```bash
 $ docker exec -it [Container ID] /bin/bash
 ```
 
-## 실행중인 컨테이너 로그 확인하기
+<br />
+
+#### 실행중인 컨테이너 로그 확인하기
 
 ```bash
 $ docker logs [Container Name]
 ```
 
-## 컨테이너와 이미지의 목록 확인하고 삭제하기
+<br />
+
+#### 컨테이너와 이미지의 목록 확인하고 삭제하기
 
 ```bash
 # 현재 돌아가는 컨테이너의 목록 확인
@@ -55,7 +65,9 @@ $ docker rmi [Image ID]
 $ docker container start [Container Name]
 ```
 
-## 추가 사항
+<br />
+
+#### 추가 사항
 
 ```bash
 $ fuser -k [Port Number]/tcp
