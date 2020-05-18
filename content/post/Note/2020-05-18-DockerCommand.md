@@ -19,7 +19,11 @@ $ docker build -t [Docker Hub ID]/[Image Name]:[version] .
 ```bash
 $ docker run --publish [Local Port Number]:[Docker Port Number] -it --detach --name [New Container Name] [Image Name] /bin/bash
 # 참고로 Image Name은 [Docker Hub ID]/[Image Name]:[version]과 같이 설정하는 것이 좋다.
-# 예를 들면, dal96k/myImage:v1
+# 예시 : docker run --publish 7070:7070 -it --detach --name woomin-facebook-codedeploy dal96k/woomin-facebook:latest /bin/bash
+
+# 환경변수를 주입해서 실행하려면,
+# --env-file ./env.list
+# 예시 : docker run --env-file /home/ubuntu/.env --publish 7070:7070 -it --detach --name woomin-facebook-codedeploy dal96k/woomin-facebook:latest /bin/bash
 ```
 
 <br />

@@ -119,10 +119,10 @@ tag: [Posts]
       hooks:
         BeforeInstall:
             - location: scripts/beforeInstall.bash
-            runas: root
+              runas: root
         AfterInstall:
             - location: scripts/afterInstall.bash
-            runas: root
+              runas: root
       ```
 
 <br />
