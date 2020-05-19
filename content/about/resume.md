@@ -6,15 +6,13 @@ layout: about
 
 ## 전우민
 
-### 
-
 <br>
 
 #### 주소
 
 > **GitHub** 　　 <https://github.com/Woomin-Jeon>  
-**Blog** 　 　　 <https://woomin.netlify.com>  
-**Mail** 　 　 　 <dal96k@hanmail.net>  
+**Blog** 　 　　 <https://woomin.netlify.app>  
+**Mail** 　 　 　 <dal96k@gmail.com>  
 
 <br>
 
