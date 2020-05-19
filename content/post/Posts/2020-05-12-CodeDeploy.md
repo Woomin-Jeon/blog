@@ -397,7 +397,7 @@ tag: [Posts]
     - 먼저, 파일의 appspect.yml 파일을 실행합니다.
     - beforeinstall.bash 파일의 script를 실행합니다. 이미 존재하는 이미지를 제거하고, 가동중인 컨테이너를 제거합니다.
     - afterinstall.bash 파일의 script를 실행합니다. 아까 최신화 된 Docker Image를 Hub로부터 받아오고, 컨테이너로 구동시킵니다.
-  4. Docker Image 안에 있는 Dockerfile에 "ENTRYPOINT ["npm", "start"]"와 같은 실행 명령어가 존재하면 컨테이너가 구동되면 그 안의 프로젝트를 자동으로 실행합니.
+  4. Docker Image 안에 있는 Dockerfile에 "ENTRYPOINT ["npm", "start"]"와 같은 실행 명령어가 존재하면 컨테이너가 구동되면 그 안의 프로젝트를 자동으로 실행합니다.
   5. 배포가 완료되었습니다.
 
 
