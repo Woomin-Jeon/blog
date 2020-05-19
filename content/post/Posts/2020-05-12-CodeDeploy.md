@@ -17,10 +17,13 @@ tag: [Posts]
 
   1. AWS IAM으로 이동하여 사용자를 추가합니다.
     - "사용자" 탭에서 "사용자 추가"를 클릭합니다.
+    <img src="../images/codedeploy/1.png" />
     - "사용자 이름"을 자유롭게 설정합니다. (이번 포스팅에서 저는 "admin"으로 하겠습니다)
     - "AWS 엑세스 유형"으로는 "프로그래밍 방식 엑세스"를 체크합니다. (다음)
+    <img src="../images/codedeploy/2.jpg" />
     - "권한 설정"에서 "기존 정책 직접 연결"을 선택합니다.
     - "AdministratorAccess" 하나만을 체크합니다. (다음)
+    <img src="../images/codedeploy/3.jpg" />
     - "태그 추가"는 넘어갑니다. (다음)
     - 최종사항을 검토하고 "사용자 만들기"를 클릭합니다.
     - "엑세스 키 ID(AWS-ACCESS-KEY-ID)"와 "비밀 엑세스 키(AWS-SECRET-ACCESS-KEY"는 반드시 적어놓고 잊어버리지 않도록 해야합니다.
@@ -30,12 +33,15 @@ tag: [Posts]
 
   2. AWS IAM으로 이동해서 새로운 그룹을 하나 생성합니다.
     - "그룹" 탭에서 "새로운 그룹 생성"을 클릭합니다.
+    <img src="../images/codedeploy/4.jpg" />
     - "그룹 이름"은 자유롭게 설정합니다. (이번 포스팅에서 저는 "CodeDeploy-group"으로 하겠습니다)
     - 정책 설정은 넘어갑니다. 이후에 직접 스크립트를 넣을겁니다. (다음)
     - 검토를 마치고 "그룹 생성"을 클릭하여 그룹 생성을 마칩니다.
     - 이제 생성한 그룹의 "권한" 탭으로 이동해서 "인라인 정책"을 펼친 후 "여기"를 클릭합니다.
+    <img src="../images/codedeploy/5.jpg" />
     - "사용자 지정 정책"을 선택한 뒤 자유롭게 "정책 이름"을 작성합니다. (이번 포스팅에서 저는 "Custom-policy"로 하겠습니다)
     - 다음 코드를 "정책 문서"에 붙여넣습니다.
+    <img src="../images/codedeploy/6.jpg" />
 
       ```javascript
       {
@@ -60,6 +66,7 @@ tag: [Posts]
       }
       ```
     - 이제 생성된 그룹의 "사용자" 탭에서 "그룹의 사용자 추가"로 아까 생성하였던 사용자(admin)을 등록합니다.
+    <img src="../images/codedeploy/7.jpg" />
 
 <br />
 
@@ -207,16 +214,21 @@ tag: [Posts]
 
   1. AWS IAM으로 이동해서 CodeDeploy에 대한 역할을 생성합니다.
     - "역할" 탭의 "역할 만들기"를 클릭합니다.
+    <img src="../images/codedeploy/8.jpg" />
     - "AWS 서비스"를 선택하고 서비스와 사용사례로 "CodeDeploy"를 선택합니다. (다음)
+    <img src="../images/codedeploy/9.jpg" />
     - "권한 정책"으로 "AWSCodeDeployRole"를 확인하고 넘어갑니다. (다음)
     - "태그 추가"는 넘어갑니다. (다음)
     - "검토"에서 "역할 이름"을 자유롭게 작성합니다. (이번 포스팅에서 저는 "CodeDeploy-role-example"로 하겠습니다)
+    <img src="../images/codedeploy/10.jpg" />
 
 <br />
 
   2. AWS IAM으로 이동해서 EC2에 대한 역할을 생성합니다.
     - "역할" 탭의 "역할 만들기"를 클릭합니다.
+    <img src="../images/codedeploy/8.jpg" />
     - "AWS 서비스"를 선택하고 서비스와 사용사례로 "EC2"를 선택합니다. (다음)
+    <img src="../images/codedeploy/11.jpg" />
     - "권한 정책"으로 총 4개의 정책을 선택합니다. (다음)  
       - "AmazonS3FullAccess"  
       - "AWSCodeDeployFullAccess"  
@@ -224,12 +236,14 @@ tag: [Posts]
       - "CloudWatchLogsFullAccess"
     - "태그 추가"는 넘어갑니다. (다음)
     - "검토"에서 "역할 이름"을 자유롭게 작성합니다. (이번 포스팅에서 저는 "EC2-role-example"로 하겠습니다)
+    <img src="../images/codedeploy/12.jpg" />
 
 <br />
 
   3. EC2 instance에 앞서 생성한 EC2 역할을 적용합니다.
     - AWS EC2 "인스턴스" 탭으로 이동하여 실행중인 instance에 마우스 우클릭을 합니다.
     - "인스턴스 설정"에서 "IAM 역할 연결/바꾸기"를 클릭합니다.
+    <img src="../images/codedeploy/13.jpg" />
     - 아까 생성한 EC2-role-example로 IAM 역할을 변경합니다.
 
 <br />
@@ -240,14 +254,17 @@ tag: [Posts]
 
   1. AWS CodeDeploy로 이동하여 애플리케이션을 생성합니다.
     - "애플리케이션" 탭에서 "애플리케이션 생성"을 클릭합니다.
+    <img src="../images/codedeploy/14.jpg" />
     - "애플리케이션 이름"을 자유롭게 작성합니다. (이번 포스팅에서 저는 "CodeDeploy-application-example"로 하겠습니다)
     - "컴퓨팅 플랫폼"으로는 "EC2/온프로미스"를 선택합니다.
+    <img src="../images/codedeploy/15.jpg" />
     - 애플리케이션 생성을 마칩니다.
 
 <br />
 
   2. 방금 생성한 애플리케이션의 배포그룹을 만들어줍니다.
-    - "배포 그룹 생성"을 클릭합니다.
+    - "배포 그룹 생성"을 클릭합니다.  
+    <img src="../images/codedeploy/16.jpg" />
     - "배포 그룹 이름"을 입력합니다. (이번 포스팅에서 저는 "CodeDeploy-group-example"로 하겠습니다)
     - "서비스 역할"로 아까 생성했던 CodeDeploy 정책인 "CodeDeploy-role-example"을 선택합니다.
     - "배포 유형"으로 "현재 위치"를 선택합니다.
@@ -261,18 +278,21 @@ tag: [Posts]
     - "배포 구성"은 초기값 그대로 "CodeDeployDefauly.AllAtOnce"로 하면 됩니다.
     - "로드밸런서"는 활성화하지 않습니다.
     - 이제 "배포 그룹 생성" 버튼을 클릭하고 마칩니다.
+    <img src="../images/codedeploy/17.jpg" />
 
 <br />
 
   3. 이제 배포를 만들어 봅니다.
     - "애플리케이션" 탭에서 아까 만들 애플리케이션으로 들어갑니다.
     - "배포" 탭에서 "배포 만들기"를 선택합니다.
+    <img src="../images/codedeploy/18.jpg" />
     - "배포 그룹"으로는 아까 만들었던 "CodeDeploy-group-example"를 선택합니다.
     - "개정 유형"으로 "애플리케이션을 GitHub에 저장"을 클릭합니다.
     - "GitHub 토큰 이름"은 자유롭게 작성하시고 GitHub와 연결합니다.
     - "레포지토리 이름"에 배포하고자 하는 프로젝트의 레포지토리를 적습니다.
     - "커밋 ID"에는 가장 최근 commit ID를 적습니다.
     - 나머지는 설정하지 않고 "배포 만들기"를 클릭함으로써 마칩니다.
+    <img src="../images/codedeploy/19.jpg" />
 
 <br />
 
@@ -381,7 +401,7 @@ tag: [Posts]
   5. 배포가 완료되었습니다.
 
 
-<img src="../images/deployment-flow.png" />
+<img src="../images/codedeploy/deployment-flow.png" />
 
 <br />
 <br />
