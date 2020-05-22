@@ -3,7 +3,7 @@ module.exports = {
   description: `Jeon Woomin's Dev Blog`, // Your blog description
   author: `Jeon Woomin`,
   introduction: `takes notes of my trace`,
-  siteUrl: `http://woomin.netlify.com/`, // Your blog site url
+  siteUrl: `http://woomin.netlify.app/`, // Your blog site url
   social: [
     //You can find and use icons on the https://fontawesome.com/icons?d=gallery&s=brands
     {
