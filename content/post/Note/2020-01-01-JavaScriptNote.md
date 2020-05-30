@@ -1,5 +1,5 @@
 ---
-title: "JavaScript Note"
+title: "Note - JavaScript"
 date: 2020-01-01
 tag: ["Note"]
 ---
