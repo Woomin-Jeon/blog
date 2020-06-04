@@ -27,10 +27,10 @@ export const Bio = () => {
               style={{ borderRadius: `100%` }}
             />
             <div className="description">
+              <h3 className="intro">{introduction}</h3>
               <Link to="/about">
-                <h3 className="author">{author}</h3>
+                <p className="author">{author}</p>
               </Link>
-              <p className="intro">{introduction}</p>
               {social.map((v, index) => (
                 <a href={v.url} key={index}>
                   <FontAwesomeIcon
