@@ -20,16 +20,18 @@ export const Bio = () => {
 
         return (
           <div className="user">
-            <Image
-              className="profile"
-              fixed={data.profile.childImageSharp.fixed}
-              alt="Your Profile"
-              style={{ borderRadius: `100%` }}
-            />
+            <Link to="/about">
+              <Image
+                className="profile"
+                fixed={data.profile.childImageSharp.fixed}
+                alt="Your Profile"
+                style={{ borderRadius: `100%` }}
+              />
+            </Link>
             <div className="description">
-              <h3 className="intro">{introduction}</h3>
+              <h3 className="author">{author}</h3>
               <Link to="/about">
-                <p className="author">{author}</p>
+                <p className="intro">{introduction}</p>  
               </Link>
               {social.map((v, index) => (
                 <a href={v.url} key={index}>
