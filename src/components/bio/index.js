@@ -30,20 +30,22 @@ export const Bio = () => {
             </Link>
             <div className="description">
               <h3 className="author">{author}</h3>
-              <Link to="/about">
-                <p className="intro">{introduction}</p>  
-              </Link>
-              {social.map((v, index) => (
-                <a href={v.url} key={index}>
-                  <FontAwesomeIcon
-                    key={index}
-                    icon={['fab', v.icon]}
-                    style={{ width: '23px', marginRight: '10px' }}
-                    fixedWidth
-                    className="icon"
-                  />
-                </a>
-              ))}
+              <div className="link">
+                {social.map((v, index) => (
+                  <a href={v.url} key={index}>
+                    <FontAwesomeIcon
+                      key={index}
+                      icon={['fab', v.icon]}
+                      style={{ width: '23px', marginRight: '10px' }}
+                      fixedWidth
+                      className="icon"
+                    />
+                  </a>
+                ))}
+                <Link to="/about">
+                  <p className="intro">{introduction}</p>  
+                </Link>
+              </div>
             </div>
           </div>
         )
