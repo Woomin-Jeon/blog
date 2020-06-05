@@ -43,7 +43,7 @@ export const Bio = () => {
                   </a>
                 ))}
                 <Link to="/about">
-                  <p className="intro">{introduction}</p>  
+                  <img src="https://image.flaticon.com/icons/svg/1387/1387955.svg" className="resume"/>
                 </Link>
               </div>
             </div>
