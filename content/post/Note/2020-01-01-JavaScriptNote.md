@@ -4,56 +4,6 @@ date: 2020-01-01
 tag: ["Note"]
 ---
 
-#### includes 메서드  
-
-  배열에 특정 요소가 있는지 판별한 후 True/False를 반환한다.
-
-  ```javascript
-  const arr = [1, 2, 3, 4, "incl"];  
-  arr.includes(3) -> True  
-  arr.includes("incl") -> True  
-  ```
-  
-<br />
-
-#### split 메서드  
-
-  String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눈다.
-  
-  ```javascript
-  const arr = "I love programming";  
-  arr.split(' ') -> ["I", "love", "programming"]  
-  ```
-
-  <br />
-
-#### join 메서드  
-
-  배열의 모든 요소들을 지정한 구분자를 이용하여 하나의 문자열로 만든다.
-  
-  ```javascript
-  ex) const arr = ["I", "love", "programming"];  
-  arr.join('') -> "I,love,programming"  
-  arr.join(' ') -> "I love programming"  
-  arr.join('-') -> "I-love-programming"  
-  ```
-  
-<br />
-
-#### sort 메서드  
-
-  배열의 요소를 적절하게 정렬한 후 배열을 반환하는 것이지만 여기서는 오름차순으로 배열하는 법과 내림차순으로 배열하는 법을 설명한다. 
-  
-  ```javascript
-  ex) const arr = [2, 4, 1, -5, 3];  
-  arr.sort((a, b) => a - b) -> [-5, 1, 2, 3, 4]  
-  arr.sort((b, a) => b - a) -> [4, 3, 2, 1, -5]  
-  cf) "a - b > 0" 이면 배열에서 a, b의 자리를 바꾸는 메서드라고 보면 된다.  
-  ```  
-
-  cf) 참고로 문자 character도 대소 비교가 가능하다.  
-  예를 들어, `a < b < c < d < ... < y < z` 이다.
-
 #### sort 메서드에 대한 조금 더 깊은 이해
 
 - 배열 arr = [2, 3, 1, 5, 4] 가 있다고 가정하자.
@@ -80,39 +30,10 @@ tag: ["Note"]
 
 <br />
 
-#### trim 메서드  
-
-  문자열 양 쪽 끝의 공백을 제거해주는 메서드이다.
-  
-  ```javascript
-  ex) const arr = "　　　Hello　　　";  
-  arr.trim() -> "Hello"
-  ```
-
-<br />
-
-#### 몫 구하기  
-
-  JavaScript에서 몫을 구하기 위해서는 그냥 a/b 하면 안되고, parseInt()를 사용해야 한다.  
-  예를들면, 12 / 5 = 2.4 가 나오지만 parseInt(12 / 5, 10)으로 하면 2가 나오게 된다.  
-  참고로 위의 예시 parseInt(x / y, d)에서 d = 10은 10진수를 의미한다.
-
-<br />
-
 #### 숫자 합치기  
 
   JavaScript에서 여러 숫자를 하나로 합치는 방법은, 10 + ‘’ + 5 = “105” 이것과 같이 하면 된다.  
   그리고 이걸 다시 숫자로 바꾸려면, +(10 + ‘’ + 5) = 105 로 하면 된다.
-
-<br />
-
-#### 객체를 담은 배열에서 객체의 프로퍼티를 조건에 맞게 변경하는 방법  
-
-  객체를 담은 배열 arr = [{...}, {...}, ... ]에서, arr 의 객체 프로퍼티를 변경하는 방법은 .map 메서드와 삼항연산자를 이용하여 조건을 부여한 후 바꾸면 된다.  
-  
-  ```javascript
-  arr: arr.map((v) => (v.property == condition ? v : { …v, prop: v.prop + 1 }))
-  ```
 
 <br />
 
@@ -124,69 +45,6 @@ tag: ["Note"]
   4. 함수를 통해 처리된 x 값의 결과물 y가 함수 바깥으로 나오는 과정에 문제는 없는가
   5. 결과물 y가 제대로 잘 return 되었는가
 
-<br />
-
-#### 배열에서 조건에 맞는 원소가 몇개인지 확인하는 방법  
-  
-  ```javascript
-  arr.filter((v) => 조건식).length;
-  ```
-
-<br />
-
-#### 배열을 객체로 만드는 방법  
-
-  배열 result=[…]에 대해서
-  
-  ```javascript
-  result = result.map(v, i) => ({ index: i, value: v });
-  ```
-
-  cf) 위의 예시 .map((v, i))에서 map의 두번째 인자 i는 index를 의미한다. 위와 같이 설정하면 자동으로 index값을 0 부터 넣어준다.
-
-<br />
-  
-#### ESLint 사용하는 법
-
-- VSCode에서 ESLint 확장 프로그램을 설치한다.
-- $ npm i eslint
-- $ npx eslint --init
-- eslintrc.js에서 rules에 .js, .jsx 확장자 무시하도록 설정한다.  
-  -> "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-
-<br />
-
-#### JavaScript 올림, 내림, 반올림 메서드
-
-- Math.floor() 메서드  
-  소숫점 아래 부분을 내림하여 정수만 남기는 메서드이다.
-  
-  ```javascript
-  Math.floor(5.64) -> 5
-  Math.floor(3.99) -> 3
-  Math.floor(-5.33) -> -6
-  ```
-
-- Math.round() 메서드  
-  소숫점 아래 부분을 반올림하여 정수만 남기는 메서드이다.
-
-  ```javascript
-  Math.round(5.95) -> 6
-  Math.round(5.5) -> 6
-  Math.round(5.45) -> 5
-  Math.round(-5.75) -> -6
-  Math.round(-5.05) -> -5
-  ```
-
-- Math.ceil() 메서드  
-  소숫점 아래 부분을 올림하여 정수만 남기는 메서드이다.
-  
-  ```javascript
-  Math.ceil(0.95) -> 1
-  Math.ceil(7.01) -> 8
-  Math.ceil(-5.95) -> 5
-  Math.ceil(-9.01) -> 9
-  ```
 
 <br />
 
@@ -209,18 +67,6 @@ tag: ["Note"]
 
 <br />
 
-#### Math.sqrt 메서드  
-
-  제곱근을 반환해주는 메서드이다.
-
-  ```javascript
-  Math.sqrt(121) -> 11
-  Math.sqrt(9) -> 3
-  Math.sqrt(122) -> 11.045361
-  ```
-
-<br />
-
 #### substr 메서드  
 
   String.substr(a, b) 문자열 추출 메서드. 인덱스 a에서부터 b개 만큼 잘라서 반환.
@@ -228,30 +74,6 @@ tag: ["Note"]
   ```javascript
   const arr = [1, 2, 3, 4, 5];
   arr.substr(1,3) -> [2, 3, 4]
-  ```
-
-<br />
-
-#### slice와 splice 메서드  
-
-  지금까지 slice와 splice의 차이는 원본 배열을 건드리냐 아니냐의 차인줄 알고 slice를 splice 처럼 쓰려고 했으나 들어가는 인자값이 다르다는 것을 알게되었다.  
-  먼저, Array.splice(n, m)은 원본배열 Array를 변형시키며, n번째 인덱스에서부터 m개 만큼 제거한다.  
-  Array.slice(n, m)은 원본배열 Array를 변형시키지 않으며, n번째 인덱스에서부터 m번째 인덱스 `전까지` 제거하여 반환한다.  
-  쉽게 예시를 보자,
-
-  ```javascript
-  const arrSplice = ['A', 'B', 'C', 'D', 'E'];
-  const arrSlice = ['A', 'B', 'C', 'D', 'E'];
-
-  const forSplice = arrSplice.splice(1, 3);
-  const forSlice = arrSlice.slice(1, 3);
-
-  console.log(forSplice) -> ['B', 'C', 'D']
-  console.log(arrSplice) -> ['A', 'E']
-  
-  // arrSlice[1]에서부터 arr.slice[3]전까지 -> B ~ C까지(D 전까지)
-  console.log(forSlice) -> ['B', 'C']
-  console.log(arrSlice) -> ['A', 'B', 'C', 'D', 'E']
   ```
 
 <br />
@@ -362,5 +184,3 @@ map.get(id) -> 'banana'
      것이라는 걸 이용하여, 다음과 같이 부분집합인지를 구한다. */
   arr.toString().includes(subArr.toString());
   ```
-
-<br />
