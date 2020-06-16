@@ -82,6 +82,15 @@ layout: about
 
 <br>
 
+## 읽을 책
+
+- Code Complete 코드 컴플리트 2 - 스티브 맥코넬
+- Clean Code - 로버트C. 마틴
+- Effective Java - 조슈아 블로크
+- 리펙터링 - 마틴 파울러
+
+<br>
+
 ## 활동
 
 - 이태원 코딩도장에서 수련중입니다.
