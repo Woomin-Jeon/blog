@@ -28,14 +28,14 @@ tag: ["Note"]
     });
     ```
 
-<br />
+<br>
 
 #### 숫자 합치기  
 
   JavaScript에서 여러 숫자를 하나로 합치는 방법은, 10 + ‘’ + 5 = “105” 이것과 같이 하면 된다.  
   그리고 이걸 다시 숫자로 바꾸려면, +(10 + ‘’ + 5) = 105 로 하면 된다.
 
-<br />
+<br>
 
 #### 함수에서 발생하는 에러를 해결하기 위한 5가지 step  
 
@@ -46,7 +46,7 @@ tag: ["Note"]
   5. 결과물 y가 제대로 잘 return 되었는가
 
 
-<br />
+<br>
 
 #### JavaScript 객체 프로퍼티 추출과 관련된 메서드  
   
@@ -65,7 +65,7 @@ tag: ["Note"]
     -> ["woomin", "male", "what"]
   ```
 
-<br />
+<br>
 
 #### substr 메서드  
 
@@ -76,7 +76,7 @@ tag: ["Note"]
   arr.substr(1,3) -> [2, 3, 4]
   ```
 
-<br />
+<br>
 
 #### 삼항연산자와 "&&"  
   
@@ -91,7 +91,7 @@ tag: ["Note"]
   a < b && answer.push(a);
   ```
 
-<br />
+<br>
   
 #### 10진수 x를 y진수로 바꾸는 법 : x.toString(y)  
 
@@ -103,7 +103,7 @@ tag: ["Note"]
   console.log(changedNum) -> "12"
   ```
 
-<br />
+<br>
 
 #### x진수로 쓰여진 value가 10진수로 얼마인지 판단하는 법 : parseInt(value, x)  
 
@@ -115,7 +115,7 @@ tag: ["Note"]
   console.log(changedNum) -> 10
   ```
 
-<br />
+<br>
 
 #### 문자를 아스키코드로, 아스키코드를 문자로 변환하는 메서드  
   
@@ -129,35 +129,35 @@ tag: ["Note"]
   String.fromCharCode(97) -> "a"
   ```
 
-<br />
+<br>
 
 #### 자릿수를 맞춰주는 메서드 : padStart()
 
-```javascript
-const num = '1';
-num.padStart(3, '0') -> '001'
-num.padStart(4, '*') -> '***1'
-```
+  ```javascript
+  const num = '1';
+  num.padStart(3, '0') -> '001'
+  num.padStart(4, '*') -> '***1'
+  ```
 
-<br />
+<br>
 
 #### Map 객체
 
-```javascript
-const map = new Map();
-const id = 'userID';
-let name;
+  ```javascript
+  const map = new Map();
+  const id = 'userID';
+  let name;
 
-name = 'apple';
-map.set(id, name); -> userID: 'apple'
+  name = 'apple';
+  map.set(id, name); -> userID: 'apple'
 
-name = 'banana';
-map.set(id, name); -> userID: 'banana;
+  name = 'banana';
+  map.set(id, name); -> userID: 'banana;
 
-map.get(id) -> 'banana'
-```
+  map.get(id) -> 'banana'
+  ```
 
-<br />
+<br>
 
 #### 배열에서 가장 큰 값을 찾는 법
 
@@ -166,7 +166,7 @@ map.get(id) -> 'banana'
   Math.max(...arr) -> 5
   ```
 
-<br />
+<br>
 
 #### 부분 집합인지를 판별하는 법
 
