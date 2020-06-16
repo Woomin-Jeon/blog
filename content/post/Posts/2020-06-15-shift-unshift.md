@@ -1,5 +1,5 @@
 ---
-title: "「JavaScript」 push, pop, shift, unshift의 효율성" 
+title: "[JavaScript] push, pop, shift, unshift의 효율성에 대한 제고" 
 date: 2020-06-16
 tag: ["Posts"]
 ---

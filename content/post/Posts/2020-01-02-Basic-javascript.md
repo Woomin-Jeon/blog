@@ -1,5 +1,5 @@
 ---
-title:  "「JavaScript」 필수 개념"
+title:  "[JavaScript] 기본 개념에 대해 알아보자"
 date: 2020-01-14
 tag: ["Posts"]
 ---

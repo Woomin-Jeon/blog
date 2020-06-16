@@ -1,5 +1,5 @@
 ---
-title:  "「Git」 Rebase"
+title: "[Git] Rebase란?"
 date: 2020-01-04
 tag: ["Posts"]
 ---

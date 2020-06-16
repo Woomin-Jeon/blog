@@ -1,5 +1,5 @@
 ---
-title: "「React」 시작하기"
+title: "[React] 시작하기"
 date: 2020-01-24
 tag: ["Posts"]
 ---

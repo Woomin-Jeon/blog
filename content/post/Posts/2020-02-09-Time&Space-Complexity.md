@@ -1,5 +1,5 @@
 ---
-title: "「Algorithm」 시간복잡도와 공간복잡도, 그리고 Big-O"
+title: "[Algorithm] 시간복잡도와 공간복잡도, 그리고 Big-O"
 date: 2020-02-09
 tag: ["Posts"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "「Algorithm」 재귀함수"
+title: "[Algorithm] 재귀함수에 대해서"
 date: 2020-02-09
 tag: ["Posts"]
 ---

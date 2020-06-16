@@ -1,5 +1,5 @@
 ---
-title: 「Deploy」 CodeDeploy로 자동배포 해보기
+title: "[Deploy] CodeDeploy로 자동배포 해보기"
 date: 2020-05-12
 tag: [Posts]
 ---
