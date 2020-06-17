@@ -10,7 +10,7 @@ export const Layout = ({ children, title }) => (
     <Helmet>
       <meta name="google-site-verification" content="nqKk1qa0fFdufoYINoIqIgkDZOIFMyAOGir7cqK4BL8" />
       
-      <!-- Global site tag (gtag.js) - Google Analytics -->
+      {/* Global site tag (gtag.js) - Google Analytics */}
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169806970-1"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
