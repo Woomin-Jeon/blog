@@ -4,16 +4,6 @@ date: 2020-06-16
 tag: ["Posts"]
 ---
 
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169806970-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-169806970-1');
-  </script>
-</head>
-
 ## 들어가기
 
 저는 지금까지 JavaScript의 배열은 사실 객체이기 때문에, 일반적인 배열의 역할도 하며 리스트의 역할도 하는것으로 알고 있었습니다. 그렇기 때문에 인덱스를 통한 접근이 자유롭게 가능하고, push, pop, shift, unshift와 같은 배열의 추가 제거도 자유롭다고 생각했습니다.  
