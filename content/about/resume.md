@@ -82,7 +82,7 @@ layout: about
 
 <br>
 
-## 읽을 책
+## 읽고 싶은 책
 
 - Code Complete 코드 컴플리트 2 - 스티브 맥코넬
 - Clean Code - 로버트C. 마틴
