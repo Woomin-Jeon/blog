@@ -1,8 +1,8 @@
 module.exports = {
   title: `Woomin Blog`, // Your blog title
-  description: `Jeon Woomin's Dev Blog`, // Your blog description
+  description: `take notes of my trace`, // Your blog description
   author: `Jeon Woomin`,
-  introduction: `➤ résumé`,
+  introduction: `code with novel`,
   siteUrl: `http://woomin.netlify.app/`, // Your blog site url
   social: [
     //You can find and use icons on the https://fontawesome.com/icons?d=gallery&s=brands
