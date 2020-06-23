@@ -8,8 +8,8 @@
  pre[class*="language-"] {
    color: #FFFFFF;
    background: none;
-   font-family:  Ubuntu, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-   font-size: 1em;
+   font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+   font-size: 1.07em;
    text-align: left;
    white-space: pre;
    word-spacing: normal;
@@ -48,7 +48,7 @@
 }
 
  div.gatsby-highlight {
-   background: rgb(38, 50, 56);
+   background: #232a24;
  }
 
  /* Code blocks */
