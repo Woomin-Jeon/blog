@@ -4,29 +4,40 @@ date: 2020-01-01
 tag: ["Note"]
 ---
 
-#### sort 메서드에 대한 조금 더 깊은 이해
+#### 문자열의 sort
 
-- 배열 arr = [2, 3, 1, 5, 4] 가 있다고 가정하자.
-- arr.sort((a, b) => a - b)는 배열 arr을 오름차순 [1, 2, 3, 4, 5]로 만든다.
-- 이 과정을 깊게 살펴보면, 먼저 sort가 처음 돌때, (a, b)는 (2, 3)을 의미한다. a=2, b=3. 그리고 함수의 내용이 1보다 크면 (a, b)를 (b,a로 바꿔주는 역할을 하는 것이 sort이다.
-- 즉, 2 - 3 = -1로 1보다 작기때문에 (a, b)의 위치는 바뀌지 않는다.
-- 다음으로 sort가 돌면, 다시 처음부터 (2, 3)에 대해 판단을 하고 위의 경우에서 보았듯이 자리는 그대로 놥둔다. 이제 (a, b)는 (3, 1이된다. 3 - 1은 2이므로 1보다 크기 때문에 (a, b)의 위치는 (b, a)로 바뀌어서 이 시점에서의 arr은 [2, 1, 3, 5, 4]가 된다.
-- 이제 다시 또 다음으로 sort가 돌면, 처음의 (2, 1)에 대해 이 두 수는 1보다 큰 값을 반환하므로 자리가 바뀌고 [1, 2, 3, 5, 4]가 된다.
-- 이제 다시 또 다음으로 sort가 돌면, 배열 arr의 앞의 [1, 2, 3] 은 위의 경우처럼 넘어가고 (3, 5)에 대한 판단을 한다.
-- 이런식으로 sort는 계속 배열 arr을 돌면서 원소들을 정렬한다.
-- 그러므로, arr.sort((a, b) => "함수의 내용") 으로 함수의 내용을 우리가 만들고 그 반환값을 1, -1, 0 으로 정해줌으로써 조건에따른sort를 가능하게 한다. 아래는 이에대한 예시이다.
+  ```javascript
+  const arr = [
+    { index: 0, name: "bbb" },
+    { index: 1, name: "ddd" },
+    { index: 2, name: "ccc" },
+    { index: 3, name: "eee" },
+    { index: 4, name: "aaa" },
+    { index: 5, name: "fff" },
+  ];
+  ```
 
-    ```javascript
-    failureRate = failureRate.map((v, i) => v = { rate: v, index: i+1 });
-    failureRate.sort((a, b) => {
-      return a.rate > b.rate ? -1 :
-      a.rate < b.rate ? 1 :
-      a.rate == b.rate ?
-        a.index < b.index ? -1 :
-        a.index > b.index ? 1 : 0 :
-      0;
-    });
-    ```
+  이런 배열을 name을 기준으로 정렬하려면 어떻게 해야할까?
+
+  ```javascript
+  // 첫번째 방법
+  arr.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+  });
+
+  // 두번째 방법
+  arr.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+  ```
+
+  두번째 방법이 훨씬 가독성이 좋다. 앞으로는 localeCompare() 메서드를 적극 활용하도록 하자.  
+  (참고로 효율은 첫번째 방법이 더 좋다)
 
 <br>
 
@@ -131,16 +142,6 @@ tag: ["Note"]
 
 <br>
 
-#### 자릿수를 맞춰주는 메서드 : padStart()
-
-  ```javascript
-  const num = '1';
-  num.padStart(3, '0') -> '001'
-  num.padStart(4, '*') -> '***1'
-  ```
-
-<br>
-
 #### Map 객체
 
   ```javascript
@@ -159,28 +160,11 @@ tag: ["Note"]
 
 <br>
 
-#### 배열에서 가장 큰 값을 찾는 법
-
-  ```javascript
-  const arr = [1, 2, 3, 4, 5];
-  Math.max(...arr) -> 5
-  ```
-
-<br>
-
 #### 부분 집합인지를 판별하는 법
 
   ```javascript
   const arr = [1, 2, 3, 4, 5, 6];
   const subArr = [1, 3, 4];
 
-  /* subArr이 arr의 부분집합인지를 확인하는 방법으로
-     그동안에는 every와 includes를 이용했었다. */
   subArr.every(v => arr.includes(v));
-  
-  /* 하지만 이렇게되면 subArr를 순회하며(every), arr도 순회하기 때문에(includes)
-     복잡도가 O(n^2)이 나온다. 그렇기 때문에 효율 좋은 방법을 생각해보았다.
-     그리고 includes라는 메서드가 문자열에서 해당 문자열이 포함하는 지를 살펴보는
-     것이라는 걸 이용하여, 다음과 같이 부분집합인지를 구한다. */
-  arr.toString().includes(subArr.toString());
   ```
