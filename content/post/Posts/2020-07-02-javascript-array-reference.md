@@ -1,6 +1,6 @@
 ---
 title: "[JavaScript] 이차원배열의 복사는 어떻게 할까?"
-date: 2020-07-01
+date: 2020-07-02
 tag: ["Posts"]
 ---
 
