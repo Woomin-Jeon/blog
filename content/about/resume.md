@@ -127,6 +127,7 @@ layout: about
 - 코어 자바스크립트 - 정재남
 - 함께 자라기 (애자일로 가는 길) - 김창준
 - You don't know JS - 카일 심슨
+- CODE 코드 - 찰스 펫졸드
 
 <br>
 
