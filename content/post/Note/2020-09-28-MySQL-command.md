@@ -111,3 +111,45 @@ tag: ["Note"]
   SELECT id, COUNT(id) FROM user GROUP BY sex HAVING(age > 20) ORDER BY sex ASC;
   ```
   
+## JOIN 명령어
+
+- `기본`  
+  topic 테이블의 모든 정보를 가져옵니다.
+
+    ```sql
+    SELECT * FROM topic;
+    ```
+
+- `LEFT JOIN`  
+  topic 테이블을 다 가져오는데 이를 LEFT에 붙이고, TOPIC의 author_id(외래키)와 AUTHOR의 aid(기본키)를 바탕으로 이에 매칭되도록 author 테이블을 오른쪽에 붙이고자 합니다. RIGHT JOIN은 LEFT JOIN과 같은데 테이블을 기준으로 왼쪽에 붙이는 것입니다.
+
+    ```sql
+    SELECT * FROM topic
+    LEFT JOIN author ON topic.author_id = author.aid;
+    ```
+
+- `INNER JOIN`  
+  LEFT JOIN과 쓰는 방법은 동일합니다. 이 역시 topic 테이블에 AUTHOR를 붙인다는 것인데, LEFT JOIN과 다른 점은 NULL인 값에 대해서는 제거한다는 뜻입니다. 즉, TOPIC과 author 테이블의 필드들 중 하나라도 NULL이면 이는 포함되지 않습니다.
+
+    ```sql
+    SELECT * FROM topic
+    INNER JOIN author ON topic.author_id = author.aid;
+    ```
+  
+- `FULL OUTER JOIN`  
+  자주 사용하지는 않는 JOIN입니다. FULL OUTER JOIN은 LEFT JOIN과 RIGHT JOIN한 결과를 합쳐서 중복을 제거한 것입니다.
+
+    ```sql
+    SELECT * FROM topic
+    FULL OUTER JOIN author ON topic.author_id = author.aid;
+    ```
+
+    하지만 몇몇 MySQL에서는 FULL OUTER JOIN을 지원하지 않아서, UNION이라는 키워드를 활용해 LEFT JOIN과 RIGHT JOIN을 합쳐 주는 방식으로 쿼리를 만듭니다. 참고로 UNION에는 중복 제거 (DISTINCT)가 내포되어있습니다.
+
+    ```sql
+    (SELECT * FROM topic
+    LEFT JOIN author ON topic.author_id = author.aid)
+    UNION
+    (SELECT * FROM topic
+    RIGHT JOIN author ON topic.author_id = author.aid);
+    ```
