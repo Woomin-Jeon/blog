@@ -153,3 +153,11 @@ tag: ["Note"]
     (SELECT * FROM topic
     RIGHT JOIN author ON topic.author_id = author.aid);
     ```
+
+## MySQL 원격 접속을 위한 설정
+
+MySQL을 설치하면 기본적으로 로컬(localhost)에서만 접속이 가능하고 외부에서는 접속이 불가능하게 되어 있습니다. 아울러 root 계정은 로컬에서만 접속 가능합니다. 따라서 다른 계정에 접속을 허용해주고, 이 계정을 통해 원격 접속을 해야합니다.
+
+  ```sql
+  GRANT ALL PRIVILEGES ON *.* TO '아이디'@'%' IDENTIFIED BY '패스워드';
+  ```
