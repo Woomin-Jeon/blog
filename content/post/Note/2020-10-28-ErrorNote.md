@@ -18,7 +18,7 @@ tag: ["Note"]
       <body>
         <div id="app"></div>
         <script src="main.js"></script>
-        <!-- 이 <script> 부분은 웹팩이 자동으로 삽입해주기 때문에 없어야 함 -->
+        <!-- 이 <script> 부분은 웹팩의 HtmlWebpackPlugin이 자동으로 삽입해주기 때문에 없어야 함 -->
       </body>
     </html>
     ```
