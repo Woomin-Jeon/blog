@@ -495,4 +495,45 @@ dispatch를 적게 호출할 수록 재렌더링 횟수가 줄어듭니다. 즉 
   dispatch(setUser({ id, pw, name }));
   ```
 
-<!-- 10/23일거 까지 완료 -->
+### git 충돌시 해결 흐름
+  
+  ```bash
+  $ git fetch upstream master # 원격 레포지토리의 데이터 가져오기
+  $ git rebase upstream/master # 내 브랜치에 병합
+
+  # 충돌!
+
+  # 파일들을 살펴보며 충돌한 내용들 수정
+
+  $ git add . # 수정한 파일들 staged
+  $ git rebase --continue # 커밋
+
+  # 만약 git이 꼬여서 rebase 전으로 되돌리고자 한다면
+  $ git rebase --abort
+  ```
+
+### CORS의 등장 배경
+
+현재는 클라이언트 페이지와 API 서버가 분리되어있지만, 과거에는 서버가 해당 요청에 대해 HTML 파일을 내려주는 서버사이드 렌더링 방식을 채택하였습니다. 그렇기 때문에 과거의 관점에서 동일하지 않은 도메인으로부터의 요청은 보안상 악의적인 행동을 하는 것으로 의심하는 것이 자연스러웠습니다. 그렇기 때문에 웹 브라우저는 이러한 요청 자체를 막는 선택을 하게됩니다.  
+하지만 시간이 흘러 점점 웹 사이트가 하나의 어플리케이션 역할을 하며 복잡해지자 클라이언트와 서버를 분리하여 사용하게 됐는데, 이때 다른 도메인의 API를 사용하고자 하는 경우 브라우저가 차단하기에 불가능했습니다. 이런 이슈를 우회하기 위해 개발자들은 첫번째로 JSONP라는 방식을 사용합니다. JSONP는 간단하게 HTML \<script\> 태그는 다른 도메인의 데이터를 불러오는 것이 가능하기 때문에, src 속성을 이용해 데이터를 불러오는 것입니다. 이와같이 JSONP를 사용해 다른 도메인에 대한 요청을 편법(?)으로 사용할 수는 있지만 제대로된 방법은 아니었습니다. 그래서 공식적으로 나온 방법이 CORS인 것입니다.  
+[(도움이 되었던 내용)](https://www.youtube.com/watch?v=yTzAjidyyqs&feature=youtu.be)
+
+### Webpack css-loader와 style-loader
+
+웹팩에서는 css 로더와 style로더를 같이쓰는데 이유는 다음과 같습니다.  
+css-loader는 CSS 파일을 JS 파일로 변환시켜주는 역할을 합니다. 그리고 style-loader는 자바스크립트로 변경된 스타일시트를 동적으로 head태그에 추가해주는 역할을 합니다.
+
+### URLSearchParams & useLocation으로 리액트에서 쿼리 데이터 추출하기
+
+URLSearchParams는 JavaScript 내장 객체로 URL의 쿼리 문자열에서부터 데이터를 추출할 수 있습니다. 다음은 URLSearchParams와 useLocation을 사용하여 리액트에서 쿼리스트링을 추출하는 예제입니다.
+
+  ```jsx
+  import { useLocation } from 'react-router-dom';
+
+  const queryString = useLocation().search; // ?name=woomin&age=25
+  const searchParams = new URLSearchParams(queryString);
+  // URLSearchParams { name => woomin, age => 25}
+
+  console.log(searchParams.get('name')); // woomin;
+  console.log(searchParams.get('age')); // 25;
+  ```
