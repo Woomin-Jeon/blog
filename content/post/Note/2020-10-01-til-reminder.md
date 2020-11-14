@@ -1,6 +1,6 @@
 ---
 title: "TIL 복습할 내용"
-date: 2020-10-01
+date: 2020-11-14
 tag: ["Note"]
 ---
 
@@ -537,3 +537,5 @@ URLSearchParams는 JavaScript 내장 객체로 URL의 쿼리 문자열에서부�
   console.log(searchParams.get('name')); // woomin;
   console.log(searchParams.get('age')); // 25;
   ```
+
+<!-- 11-11까지 완료 -->
