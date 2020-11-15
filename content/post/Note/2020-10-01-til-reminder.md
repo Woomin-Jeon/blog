@@ -159,75 +159,6 @@ ES2019에서 나온 해쉬(#) prefix를 통해 JavaScript class에서도 private
   }, Promise.resolve());
   ```
 
-### MySQL prepared statements
-
-prepared statements를 사용하면 SQL Injection과 같은 보안상의 문제를 해결할 수 있으므로 권장됩니다.  
-
-  ```js
-  connection.query(`INSERT INTO USER (id, password) VALUES('${id}', '${password}')`);
-  // 이와같은 쿼리문은 지양합니다.
-  
-  connection.query(`INSERT INTO USER (id, password) VALUES(?, ?)`, [id, password]);
-  connection.query(`SELECT password FROM USER WHERE userid=? `, [id]);
-  // 이처럼 기존의 값을 넣었던 곳에 "?"를 삽입하고
-  // 배열로 주입해줍니다.
-  
-  connection.query(`SELECT * FROM USER`);
-  // 이와 같이 "*"을 이용하는 것도 지양합니다.
-  // 모르는 사람 입장에서 무엇을 가져오는지 한번에 알 수 없습니다.
-  ```
-
-### MySQL Connection Pool
-
-Connection Pool이란 데이터베이스와 연결된 커넥션을 미리 지정해둔 개수(connectionLimit)만큼 만들어놓은 뒤 Pool에 보관하다가 필요할 때마다 가져가서 사용한 뒤 반환(release)하는 방법입니다. 이렇게 하면 사용자 수가 몰렸을 때, 바로바로 커넥션을 제공할 수 있으며, 만약 커넥션을 모두 소진하여 없다면 다 쓴 사용자가 반환했을 때 그 커넥션을 다시 다른 사람에게 기다린 순서대로 건네주는 방식으로 동작합니다. 이처럼 Connection Pool을 사용하면 데이터베이스의 부하를 줄이며 유동적으로 연결을 관리할 수 있으며, 계속 커넥션을 맺었다가 끊었다가 맺었다가 끊었다가와 같은 불필요한 상황을 방지할 수 있다는 장점이 있습니다. NodeJS에서의 사용 방법은 다음과 같습니다.
-
-  ```js
-  const mysql = require('mysql');
-
-  const pool = mysql.createPool({
-    host: process.env.DB_HOST_IP,
-    user: process.env.DB_ID,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    connectionLimit: 20, // default 10
-  });
-
-  pool.getConnection((err, connection) => {
-    connection.query(`SELECT id FROM USER`, (error, rows, fields) => {...});
-    connection.release(); // 사용후엔 반드시 반환 해주어야 합니다.
-  });
-  ```
-
-### MySQL Transaction
-
-MySQL에서는 트랜잭션을 간단히 만들 수 있습니다.
-
-  ```bash
-  START TRANSACTION;
-  ROLLBACK;
-  COMMIT;
-  ```
-
-  으로 사용할 수 있습니다. 트랜잭션을 시작하고자 할 때는 START TRANSACTION으로 시작함을 알리고, 뒤에 쿼리문을 넣습니다. 그리고 조건 하에서 이전 상태로 ROLLBACK을 시키거나 COMMIT을 통해 상태 변경을 수용할 수 있습니다. NodeJS에서의 사용 방법 역시 간단합니다.
-
-  ```js
-  const connection = await pool.getConnection();
-
-  try {
-    await connection.beginTransaction(); // 트랜잭션 시작
-
-    await connection.query(...);
-    await connection.query(...);
-    await connection.query(...);
-
-    await connection.commit(); // 에러가 없으면 변경 내용 수용
-  } catch(err) {
-    await connection.rollback(); // 에러가 발생하면 이전 상태로 롤백
-  } finally {
-    connection.release(); // 커넥션 반납
-  }
-  ```
-
 ### 브라우저 렌더링 엔진의 동작과정
 
 - HTML 파싱 > DOM 트리 구축 > 렌더 트리 구축 > 렌더 트리 배치 > 렌더 트리 그리기
@@ -328,40 +259,6 @@ elementFromPoint를 이용하여 해당 좌표에 맞는 돔을 찾을 수 있�
     console.log(targetElement);
   });
   ```
-
-### ERD
-
-- Entity, Attribute, Relationship으로 구성되는데 Entity를 나누는 기준은 계층 관계로 나타나는 시점입니다. 예를들어, "글"이라는 Entity를 설정하고 그 안에 Attribute로 "제목, 내용, 글쓴이, 댓글"을 설정합니다. 그런데 생각해보니 댓글이라는 Attribute는 댓글을 작성한 사람과 날짜 등의 정보가 또 들어가야 합니다. 이때 관계형 데이터베이스에서는 "글"이라는 Entity의 Attribute를 "제목, 내용, 글쓴이, 댓글(내용, 작성자, 날짜)"로 설정하는 것이 아니라, "댓글"이라는 Entity를 새로 만들어주고 이를 "글"과 연결(relationship) 해주는 것입니다.
-- Key  
-  Attribute 중 식별자가 될 수 있는 키의 후보들을 `후보키(Candidate Key)`라고 하며, 이메일, 주민등록번호, 고유 아이디 등등이 가능합니다.  
-  그리고 이 후보키들 중 우리가 정한 식별자를 `기본키(Primary Key)`라고 합니다.  
-  또한, 이 후보키들 중 기본키가 되지 못한 나머지 키들을 `대체키(Alternate Key)`라고 합니다.  
-  외래키는 외래에 있는 테이블과 연결할 수 있는 열쇠로, "A" Entity(Table)에서 "B" Entity(Table)의 기본키(Primary Key)를 가지고 있다면 "A" Entity에 있는 "B"의 Primary Key를 `외래키(Foreign Key)`라고 합니다. 즉 관계형 데이터베이스에서의 relationship은 외래키와 기본키가 연결됨으로써 완성됩니다.  
-  참고 사항으로 고유하지 않은 Attribute 여러개를 합쳐서 고유한 키를 만들 수 있다면(예, Email + 전화번호) 이 키들을 `중복키(Composite Key)`라고 합니다.
-
-### MySQL Index
-
-- 어떤 특정한 쿼리에서 조회하는데 시간이 아주 많이 걸린다거나 데이터베이스 성능이 몹시 중요한 서비스를 진행할 때 인덱스가 중요합니다.
-- 컬럼에 인덱스를 적용하게되면, SELECT는 빨라지지만 UPDATE나, INSERT, DELETE는 느려집니다.
-- 인덱스는 성능을 높여줄 수 있지만 잘못 사용하게되면 오히려 성능저하를 유발하기 때문에 주의해야 합니다. 이러한 인덱스의 특성을 이용해 간단한 규칙을 정의하면,  
-인덱스는 자주 조회되는 컬럼에 대해 적용하고, 조회 시 오랜 시간을 소모하는 컬럼에 적용하며, URL 같이 데이터가 긴 경우에는 인덱스를 사용하지 않습니다.
-- Primary키를 기반으로 조회를 하게 되면 가장 고속으로 데이터를 가져올 수 있습니다. Primary키는 테이블 전체를 통틀어 중복되지 않는 값을 가지며, 테이블마다 딱 한 개의 Primary키를 가질 수 있습니다.
-
-    ```sql
-    SELECT * FROM student WHERE id=3;
-    ```
-
-- Unique키를 기반으로 조회를 하면 역시 고속으로 데이터를 가져올 수 있습니다. Unique키는 앞선 Primary키처럼 테이블 전체를 통틀어 중복되지 않는 값을 지정해야 하지만, 테이블에 여러 개의 Unique키를 지정할 수 있습니다.
-
-    ```sql
-    SELECT * FROM student WHERE school_number=10;
-    ```
-
-- Normal키를 기반으로 조회를 하면 앞선 Primary 키나 Unique키에 비해 느린 속도로 데이터를 가져옵니다. Normal키는 중복을허용하며, 역시 여러 개의 Normal키를 지정할 수 있습니다.
-
-    ```sql
-    SELECT * FROM student WHERE major='경영학과';
-    ```
 
 ### JavaScript에서 타입 체크하는 정확한 방법
 
