@@ -435,4 +435,37 @@ URLSearchParams는 JavaScript 내장 객체로 URL의 쿼리 문자열에서부�
   console.log(searchParams.get('age')); // 25;
   ```
 
+### Drag and Drop Event
+
+JavaScript를 이용해서 Drag and Drop 기능을 사용할 수 있습니다. 필요한 키워드는 다음과 같습니다.  
+  
+- 드래그를 잡을(drag) 엘리먼트에 대해서
+    - **draggable 속성**을 걸어주어야 Drag를 사용할 수 있습니다.
+    - **dragstart 이벤트**는 드래그를 하기 위해 엘리먼트를 집으면 발생하는 이벤트입니다.
+    - **event의 dataTransfer.setData 메서드**는 드롭할 대상으로 보낼 데이터를 설정하는 방법입니다.  
+- 드래그를 놓을(drop) 엘리먼트에 대해서
+    - **droppable 속성**을 걸어주어야 Drop을 사용할 수 있습니다.
+    - **dragover 이벤트**에 **preventDefault()** 함수를 걸어줘야 drop을 막던 제한을 해제할 수 있습니다.
+    - **drop 이벤트**는 말 그대로 드래그 했던 대상을 놓을 때 발생하는 이벤트입니다.
+    - **event의 dataTransfer.getData 메서드**는 드래그한 대상으로부터 데이터를 받는 방법입니다.  
+
+간단한 코드는 다음과 같습니다. target은 드래그 할 엘리먼트이고, zone은 드롭할 엘리먼트입니다.
+
+  ```js
+  const target = document.createElement('div');
+  target.setAttribute('draggable', 'true');
+  target.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('name', 'woomin');
+  });
+
+  const zone = document.createElement('div');
+  zone.setAttribute('droppable', 'true');
+  zone.addEventListener('dragover', (event) => event.preventDefault());
+  zone.addEventListener('drop', (event) => {
+    console.log('data: ', event.dataTransfer.getData('name'));
+  });
+
+  // target을 드래그해서 zone에 드롭 하게되면 'woomin'이 출력됩니다.
+  ```
+
 <!-- 11-11까지 완료 -->
