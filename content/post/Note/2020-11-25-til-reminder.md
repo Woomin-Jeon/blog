@@ -1,6 +1,6 @@
 ---
 title: "TIL 복습할 내용"
-date: 2020-11-14
+date: 2020-11-20
 tag: ["Note"]
 ---
 
@@ -468,4 +468,65 @@ JavaScript를 이용해서 Drag and Drop 기능을 사용할 수 있습니다. �
   // target을 드래그해서 zone에 드롭 하게되면 'woomin'이 출력됩니다.
   ```
 
-<!-- 11-11까지 완료 -->
+### jwt에 토큰 만료 설정하기
+
+jsonwebtoken 라이브러리에서도 토큰의 만료를 설정할 수 있다는 사실을 알고 이를 적용해보았습니다.
+
+  ```js
+  const data = { iss, id, userInfo };
+  const secret = process.env.JWT_SECRET;
+  const expire = { expiresIn: '30m' };
+
+  const token = jwt.sign(data, secretKey, expire);
+  ```
+
+  그리고 만료를 확인하는 로직은 다음과 같습니다.
+
+  ```js
+  jwt.verify(token, secret, (err, decoded) => { // 토큰이 만료되면 err가 발생합니다.
+    if (err || decoded.iss !== process.env.TOKEN_ISS) {
+      res.status(401).json({ error: 'Auth Error' });
+    }
+  });
+
+  /*
+  err = {
+    name: 'TokenExpiredError',
+    message: 'jwt expired',
+    expiredAt: 1408621000
+  }
+  */
+  ```
+
+### Jest로 모듈 mocking 하기
+
+먼저, jest.fn()을 사용하여 모듈을 모킹할 수 있습니다.
+
+  ```js
+  import utilFunction from './util';
+
+  utilFunction.getCurrrentDate = jest.fn().mockReturnValue('2020-11-18');
+  ```
+
+  위의 경우는 utilFunction이 객체 형태이고 그 내부의 프로퍼티는 상태를 변경할 수 있기 때문에(할당 가능하기 때문에) 바로 jest.fn() 함수를 할당함으로써 mocking을 하였습니다. 하지만 아래와 같은 경우는 jest.fn()을 사용할 수 없습니다.
+
+  ```js
+  import { getCurrentDate } from './util';
+  import axios from 'axios'; // 외부 모듈
+
+  getCurrentDate = jest.fn(); // Error: "getCurrentDate" is read-only
+  axios = jest.fn(); // Error: "axios" is read-only
+  // 두 경우 모두 const이기 때문에 값을 할당하는 것이 불가능합니다.
+  ```
+
+  따라서 이와 같은 경우에는 jest에서 제공하는 jest.mock() 함수를 사용해야 합니다.
+
+  ```js
+  import axios from 'axios'; // 외부 모듈
+
+  jest.mock('axios');
+
+  axios.mockImplementation(() => {...}); // 모킹 함수 작성
+  ```
+
+<!-- 11.20까지 작성 -->
