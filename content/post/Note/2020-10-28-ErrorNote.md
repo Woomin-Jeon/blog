@@ -48,3 +48,21 @@ tag: ["Note"]
       </body>
     </html>
     ```
+
+- **styled-components: Over 200 classes were generated for component styled.div. Consider using the "attrs" method, together with a style object for frequently changed styles.`**  
+  styled-components의 attrs 속성은 정적인 속성, 예를들면 input의 type이나 radio 버튼의 checked와 같은 것들을 설정할 수 있으며, 동적으로 변화하는 속성에 대해서도 사용하여 최적화 할 수 있습니다. 제가 겪었던 이슈는 attrs를 사용하지 않고 템플릿 리터럴 내부에 "${}"를 사용하여 onChange에 따라 색변경을 해주었었는데, 이렇게 하게되니 렉이 걸리고 해당 에러가 발생했습니다. 이 상황에서 attrs를 사용하면 최적화를 해주는 것 같습니다.
+
+    ```js
+    // 기존 코드
+    const Layout = styled.div`
+      font-size: 16px;
+      color: ${props => props.color};
+    `;
+
+    // attrs를 사용한 코드
+    const Layout = styled.div.attrs(props => ({
+      color: props.color,
+    }))`
+      font-size: 16px;
+    `;
+    ```
