@@ -351,4 +351,156 @@ jsonwebtoken 라이브러리에서도 토큰의 만료를 설정할 수 있다�
   axios.mockImplementation(() => {...}); // 모킹 함수 작성
   ```
 
-<!-- 11.20까지 작성 -->
+### Redux Toolkit의 목적
+
+*다음은 공식 문서에 나와있는 "Redux Toolkit의 목적"에 대해서 제가 이해한 바를 바탕으로 정리한 내용입니다.*  
+
+Redux Toolkit은 Redux 로직을 작성하는 표준화된 방법으로써 고안되었으며, 기존의 Redux가 갖고 있던 세 가지 문제들을 해결하기 위해 만들어졌습니다.
+1. Redux store를 설정(config)하는 것이 너무 복잡하다.
+2. Redux를 유용하게 사용하기 위해서는 package를 많이 설치해야 한다.
+3. Redux에는 너무 많은 보일러플레이트 코드가 필요하다.
+Redux Toolkit은 모든 문제를 해결할 순 없지만, 사용자가 코드를 단순화 하고 쉽게 Redux를 세팅할 수 있도록 하는 도구들을 추상화하여 제공합니다.
+
+
+### 자식 요소들이 부모의 width를 모두 먹으면서 같은 width로 쪼개지도록 하는 방법
+
+부모 속성에 `display: flex`를 주고, 자식에게 `flex-grow: 1` 속성을 사용하면 됩니다.
+
+  ```css
+  .parent {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+    display: flex;
+  }
+
+  .child {
+    height: 50px;
+    background-color: black;
+    flex-grow: 1;
+  }
+  ```
+
+
+### JavaScript에서 클립보드에 copy하는 방법
+
+  ```js
+  const FROM_BEGINNING = 0;
+  const TO_END = 99999;
+
+  const temptCopyTarget = document.createElement("textarea");
+
+  temptCopyTarget.value = `${location.origin}/${latexInput}`;
+
+  document.body.appendChild(temptCopyTarget);
+  temptCopyTarget.select();
+  temptCopyTarget.setSelectionRange(FROM_BEGINNING, TO_END); // 모바일 환경에서 필요한 로직입니다
+  document.execCommand("copy");
+  document.body.removeChild(temptCopyTarget);
+  ```
+
+  이렇게 원하는 값을 클립보드에 넣을 수도 있고, createElement 없이 그냥 textarea나 input 돔 자체를 select()해서 그 안의 value를 클립보드에 넣을수도 있습니다.
+
+### JavaScript에서 이미지 파일을 다운받는 방법
+
+anchor 태그를 이용해서 구현할 수 있습니다.
+
+  ```js
+  const virtualLink = document.createElement("a");
+
+  virtualLink.href = 'image base64 here'
+  virtualLink.download = "your_file_name.png";
+
+  document.body.appendChild(virtualLink);
+  
+  virtualLink.click();
+  
+  document.body.removeChild(virtualLink);
+  ```
+
+### URL을 인코딩하고 디코딩하는 방법
+
+URL의 쿼리스트링으로 특수문자(수식 - "+", "\" 등등)를 넣을 필요가 있었는데, 이를 넣게되면 브라우저가 URL을 파싱하는 과정에서 이상하게 바뀌는 문제가 있었습니다. 따라서 이 쿼리스트링으로 넣은 값을 인코딩하고 디코딩하는 것이 필요했는데 해당 JavaScript 내장 메서드가 존재했습니다.
+
+  ```js
+  const q = "\\frac{1+2+3}{2}";
+  const url = `http://localhost:8080?q=${q}`
+
+  const encodedValue = encodeURI(url);
+  const decodedValue = decodeURI(encodedValue);
+
+  const encodedValue = encodeURIComponent(url);
+  const decodedValue = decodeURIComponent(encodedValue);
+  ```
+
+  `encodeURI`는 인터넷 주소에서 사용하는 :, ;, /, =, ?, & 등을 제외하고 인코딩하는 함수이며,  
+  `encodeURIComponent`는 모든 문자를 인코딩하는 함수입니다.
+
+### Optional Chaining의 활용
+
+객체의 메서드가 존재하는 경우에만 호출
+
+  ```js
+  const user1 = {
+    name: 'woo',
+    getName() {
+      return this.name;
+    },
+  };
+
+  const user2 {
+    name: 'min',
+  }
+
+  user1.getName?.(); // woo
+  user2.getName?.(); //
+  ```
+
+  user가 존재하면 user.name을 삭제한다.
+
+  ```js
+  delete user?.name;
+  ```
+
+### Caching Decorator
+
+  ```js
+  const cachingDecorator = (func) => {
+    const cache = new Map();
+
+    return (...params) => {
+      const key = params.join(',');
+      
+      if (cache.has(key)) {
+        console.log('returns cached result');
+
+        return cache.get(key);
+      }
+
+      console.log('starts caching');
+
+      const y = func(...key.split(','));
+      cache.set(key, y);
+      
+      return y;
+    }
+  }
+
+  const myFunc = (x, y, ...) => {...}
+  const cachedFunc = cachingDecorator(myFunc);
+
+  cachedFunc(2, 2); // starts caching
+  cachedFunc(2, 2); // returns cached result
+  cachedFunc(2); // starts caching
+  cachedFunc(2); // returns cached result
+  cachedFunc(3); // starts caching
+  cachedFunc(3); // returns cached result
+  ```
+
+### 객체 프로퍼티에 접근 제어하는 방법
+
+객체의 프로퍼티는 저희가 흔히 알고있는 value 외에도 flag라고 불리는 특별한 속성 세 가지를 갖습니다. 그리고 Object.getOwnPropertyDescriptor 메서드를 통해 확인할 수 있으며, Object.defineProperty 메서드를 통해 객체 프로퍼티에 대한 제어를 관리할 수 있습니다.  
+flag에는 writable, enumerbale, configurable 세 가지 속성이 있습니다.  
+이렇게 프로퍼티 각각에 대해 제어하는 방법 외에도, Object.freeze나 Object.seal과 같이 객체 내 전체 프로퍼티를 대상으로도 제약사항을 만들 수 있습니다.
+
+<!-- 12.31까지 작성 -->
