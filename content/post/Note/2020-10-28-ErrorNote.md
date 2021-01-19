@@ -66,3 +66,17 @@ tag: ["Note"]
       font-size: 16px;
     `;
     ```
+
+- **image파일을 import하는 컴포넌트에 대한 테스트 에러 해결방법**  
+  웹에서는 image 파일을 webpack file-loader를 사용하여 불러오지만 jest를 사용하는 테스트 환경에서는 image 파일(혹은 CSS 파일)을 불러올 수가 없습니다. 따라서 이 경우에는 에러가 발생하는데 해당 에러는 다음과 같이 해결할 수 있습니다.
+
+    ```js
+    // npm i -D babel-jest
+    
+    // jest.config.js
+    module.exports = {
+      moduleNameMapper: {
+        "^.+\\.(png|jpg|css)$": "babel-jest",
+      },
+    };
+    ```
