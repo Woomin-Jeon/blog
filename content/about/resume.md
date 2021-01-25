@@ -26,82 +26,57 @@ layout: about
 
 <br>
 
-## 저는
-
-- **JavaScript**에 관심이 많습니다.
-- **JavaScript**를 이용하여 웹 클라이언트(**React**)와 서버(**Express**)를 구현할 수 있습니다.
-- **Git**을 사용하고 있으며, Git을 통한 협업의 유용성에 대해 알고있습니다.
-- **Docker**가 무엇인지 알고 있으며, 이를 사용한 개발과 배포를 해본 경험이 있습니다.
-- **MongoDB**를 프로젝트에 적용해 본 경험이 있으며, 데이터 영속성의 중요함을 알고있습니다.
-- **AWS S3**를 통한 정적사이트 배포와, **AWS EC2**를 통한 API서버 배포를 해본 경험이 있습니다.
-- **GitHub Action**과 **AWS CodeDeploy**를 사용해본 경험이 있으며, 이를 통한 자동배포의 편리함을 알고 있습니다.
-- **Linux**를 운영체제로 사용하고 있고, 터미널을 사용하는데 있어 거부감 없습니다.
-- **TDD**를 통한 개발이 어떤 장점이 있는지 알고있으며 이를 꾸준히 연습하고 있습니다.
+---
 
 <br>
 
-## 프로젝트
+## 역량
+
+<br>
+
+#### HTML/CSS
+  - HTML/CSS를 이용하여 기획서에 나와있는 페이지의 마크업을 스스로 할 수 있습니다.
+  - flex와 미디어 쿼리를 사용한 반응형 디자인을 구현해본 경험이 있습니다.
+  - transition 속성을 사용한 간단한 애니메이션을 구현할 수 있습니다.
+
+#### JavaScript
+  - Vanilla JavaScript를 사용하여 하나의 프로젝트를 스스로 구현할 수 있습니다.
+  - ES6+ 문법을 활용하여 코드를 짤 수 있습니다.
+  - JavaScript라는 언어에 대한 흥미가 있어서 관련 서적을 읽고, 스터디에 참여하는 등의 활동을 하였습니다.
+
+#### React
+  - React를 사용하여 하나의 프로젝트를 스스로 구현할 수 있습니다.
+  - 커스텀 훅을 사용하여 중복되는 로직을 재사용 가능하게 추출할 수 있습니다.
+  - 렌더링 최적화를 해본 경험이 있습니다.
+
+#### Redux
+  - Redux toolkit을 사용하여 Redux 초기 설정을 완료하고, 이를 활용하여 복잡한 상태를 관리할 수 있습니다.
+
+#### Webpack/Babel
+  - Webpack과 Babel을 사용하여 프론트엔드 초기 개발환경을 설정할 수 있습니다.
+
+#### Test
+  - Jest를 활용하여 알고리즘 문제를 TDD로 해결할 수 있습니다.
+  - Jest의 mocking을 활용하여 테스트를 작성할 수 있습니다.
+  - react-testing-library와 Jest-dom을 사용하여 컴포넌트 테스트를 해본 경험이 있습니다.
+  - Jest와 supertest를 사용하여 NodeJS에서 API 테스트를 수행할 수 있습니다.
+
+#### Git & GitHub
+  - 기본적인 Git 명령어를 사용해 버전관리를 하고 팀원들과 협업 할 수 있습니다.
+  - GitHub에 Issue를 활용하고, Wiki를 작성하고, PR에 코드리뷰를 해본 경험이 있습니다.
+
+#### Etc.
+  - 협업을 통한 시너지가 개발 속도에 미치는 엄청난 영향을 직접 경험하고, 왜 협업이 중요한지 깨닫게 되었습니다.
+  - CSS-in-JS의 장점을 알고, styled-components나 emotion과 같은 라이브러리를 사용하여 스타일링을 할 수 있습니다.
+  - 프로젝트를 진행하면서 어떻게 하면 사용자가 편리할지 고민하며 개발해 본 경험이 있습니다.
+
+<br><br>
 
 ---
 
-### Facebook clone (2020.02.02 ~ 2020.04.21)
+## 포트폴리오
 
-- **소개**
-
-  Facebook을 클론 코딩하면서 JavaScript와 React, Express(NodeJS), HTTP와 Web에 대해서 배울 수 있었던 프로젝트입니다. 전반적인 웹 애플리케이션의 개발 과정을 습득하고, Docker와 클라우드를 이용한 배포 과정도 체험했습니다. 또한 Test coverage 100%를 달성하는 과정에서 책에서 봤던 설계의 중요성을 느낄 수 있었습니다.  
-  *개발기여도 : 100% (프론트엔드 / 백엔드 모두 담당)*
-
-  <br>
-
-- **사용 기술**
-
-  |                     |                                    |
-  |---------------------|------------------------------------|
-  | **FrontEnd**        | JavaScript : React, Webpack, Axios |
-  | **BackEnd**         | JavaScript : NodeJs Express        |
-  | **Database**        | MongoDB                            |
-  | **Test Framework**  | Jest, Supertest, Enzyme            |
-  | **Infra**           | AWS S3, AWS EC2, Atlas, NginX      |
-
-  <br>
-
-- **참고 주소**
-
-  **Project URL** [http://woomin-facebook.com](http://woomin-facebook.com)  
-  **FrontEnd GitHub** [https://github.com/Woomin-Jeon/facebook-clone-client](https://github.com/Woomin-Jeon/facebook-clone-client)  
-  **BackEnd GitHub** [https://github.com/Woomin-Jeon/facebook-clone-server](https://github.com/Woomin-Jeon/facebook-clone-server)  
-
-<br>
-
----
-
-### 풍덩(Poongdeong) (2020.07.13 ~ 2020.07.19)
-
-- **소개**
-
-  2020 엔젤핵 해커톤에 제출한 웹 애플리케이션입니다. 애플리케이션 사용자가 25분 포모도로 타이머와 화상기능을 통해 원격이지만 누군가와 같이 공부하고 있다는 느낌을 받고, 학습의지와 완주율을 높일 수 있도록 하는 것을 목표로 만들었습니다. 이 프로젝트를 진행하는 과정에서 처음으로 제대로된 협업을 경험할 수 있었고, 아울러 Git의 중요성을 체감할 수 있었습니다. 또한, 이전 프로젝트에서 상태관리와 CSS에 대해서 아쉬운 점이 많았는데, 이번 기회에서 Redux와 emotion이라는 라이브러리를 사용해봄으로써 많은 것을 얻을 수 있었던 프로젝트입니다.  
-  *개발기여도 : 20% (프론트엔드 및 webRTC 담당)*
-  
-  <br>
-
-- **사용 기술**
-
-  |                     |                                    |
-  |---------------------|------------------------------------|
-  | **FrontEnd**        | JavaScript : React, Redux, Webpack, Axios |
-  | **BackEnd**         | JavaScript : NodeJs Express        |
-  | **Database**        | MariaDB                            |
-  | **Test Framework**  | Jest, Supertest, React-testing-library            |
-
-  <br>
-
-- **참고 주소**
-
-  **데모영상** [https://www.youtube.com/watch?v=C82uXRYDR8E&feature=youtu.be](https://www.youtube.com/watch?v=C82uXRYDR8E&feature=youtu.be)  
-  **GitHub** [https://github.com/poongdeong/poongdeong](https://github.com/poongdeong/poongdeong)  
-  **회고** [https://woomin.netlify.app/Posts/2020-07-23-angelhack/](https://woomin.netlify.app/Posts/2020-07-23-angelhack/)
-
-<br>
+[전우민 포트폴리오 PDF](https://konkukackr-my.sharepoint.com/:p:/g/personal/dal96k_konkuk_ac_kr/EdDCeBXfRURKl2iiW5JdvS8Bew7qa5uXvg6ojEM59Qb0zg?e=PEtDJU)
 
 ---
 
@@ -124,7 +99,7 @@ layout: about
 
 <br>
 
-## 읽어야 할 책
+## 읽고 싶은 책
 
 - Code Complete 코드 컴플리트 2 - 스티브 맥코넬
 - Clean Code - 로버트C. 마틴
@@ -144,3 +119,7 @@ layout: about
 - `이태원 코딩도장`에서 수련중입니다. (2020.01.01 ~ )
 - `엔젤핵 해커톤`에 참여했습니다. (2020.07.13 ~ 2020-07.19)
 - `네이버 커넥트재단 부스트캠프 2020`을 수료했습니다. (2020.07.27 ~ 2020.12.18)
+
+<br>
+<br>
+<br>
