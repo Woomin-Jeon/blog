@@ -1,12 +1,8 @@
 ---
 title: "TIL 복습할 내용"
-date: 2020-11-20
+date: 2021-02-02
 tag: ["Note"]
 ---
-
-### NodeJS Best Practice
-
-[https://github.com/goldbergyoni/nodebestpractices#2-error-handling-practices](https://github.com/goldbergyoni/nodebestpractices#2-error-handling-practices) 
 
 ### axios withCredential 옵션
 
@@ -16,23 +12,9 @@ CORS에서는 기본적으로 쿠키를 request headers에 넣어주지 않기 �
 
 [https://www.dahae.kim/blog/github-actions-cicd/](https://www.dahae.kim/blog/github-actions-cicd/)
 
-### DockerFile
-
-Dockerfile의 ENTRYPOINT와 CMD의 차이는 ENTRYPOINT는 컨테이너 실행 시 필수적으로 실행되는 것이며, CMD는 컨테이너 실행 시 다른 옵션을 주입하면 대체됩니다. 그렇기 때문에 CMD를 사용하면 컨테이너 외부에서 명령을 실행시킬 수 있다는 장점이 있습니다.
-
 ### CSS flex-wrap
 
 CSS flex-wrap property는 flex-item 요소들이 강제로 한줄에 배치되게 할 것인지, 또는 가능한 영역 내에서 벗어나지 않고 여러행으로 나누어 표현 할 것인지 결정하는 속성입니다.
-
-### Promise가 담긴 배열을 동기적으로 처리하는 방법
-
-프로미스가 담긴 배열을 동기적으로 처리하기 위해서는 일반적인 for문이나 forEach문으로는 불가능합니다. 다음과 같은 thenable한 방식이 유효합니다.
-
-  ```js
-  arr.reduce((previousPromise, item) => {
-    return previousPromise.then(() => item())
-  }, Promise.resolve());
-  ```
 
 ### CSS 애니메이션
 
@@ -176,44 +158,6 @@ canvas 설정
   ctx.fill();
   ```
 
-### Redux dispatch와 재렌더링
-  
-dispatch를 적게 호출할 수록 재렌더링 횟수가 줄어듭니다. 즉 디스패치 한 번당 한번의 재 렌더링이 이루어 지는 것 같습니다.
-
-  ```js
-  const redux = {
-    initialState: {
-        user: {
-          id: '',
-          pw: '',
-          name: '',
-        },
-    },
-    reducers: {
-        setUserId(state, { payload: id }) {
-          return { ...state, user: { ...state.user, id } };
-        },
-        setUserPw(state, { payload: pw }) {
-          return { ...state, user: { ...state.user, pw } };
-        },
-        setUserName(state, { payload: name }) {
-          return { ...state, user: { ...state.user, name } };
-        },
-        setUser(state, { payload: user }) {
-          return { ...state, ...user }
-        },
-    },
-  };
-
-  // 세 번의 리렌더링
-  dispatch(setUserId(id));
-  dispatch(setUserId(pw));
-  dispatch(setUserId(name));
-
-  // 한 번의 리렌더링
-  dispatch(setUser({ id, pw, name }));
-  ```
-
 ### git 충돌시 해결 흐름
   
   ```bash
@@ -230,12 +174,6 @@ dispatch를 적게 호출할 수록 재렌더링 횟수가 줄어듭니다. 즉 
   # 만약 git이 꼬여서 rebase 전으로 되돌리고자 한다면
   $ git rebase --abort
   ```
-
-### CORS의 등장 배경
-
-현재는 클라이언트 페이지와 API 서버가 분리되어있지만, 과거에는 서버가 해당 요청에 대해 HTML 파일을 내려주는 서버사이드 렌더링 방식을 채택하였습니다. 그렇기 때문에 과거의 관점에서 동일하지 않은 도메인으로부터의 요청은 보안상 악의적인 행동을 하는 것으로 의심하는 것이 자연스러웠습니다. 그렇기 때문에 웹 브라우저는 이러한 요청 자체를 막는 선택을 하게됩니다.  
-하지만 시간이 흘러 점점 웹 사이트가 하나의 어플리케이션 역할을 하며 복잡해지자 클라이언트와 서버를 분리하여 사용하게 됐는데, 이때 다른 도메인의 API를 사용하고자 하는 경우 브라우저가 차단하기에 불가능했습니다. 이런 이슈를 우회하기 위해 개발자들은 첫번째로 JSONP라는 방식을 사용합니다. JSONP는 간단하게 HTML \<script\> 태그는 다른 도메인의 데이터를 불러오는 것이 가능하기 때문에, src 속성을 이용해 데이터를 불러오는 것입니다. 이와같이 JSONP를 사용해 다른 도메인에 대한 요청을 편법(?)으로 사용할 수는 있지만 제대로된 방법은 아니었습니다. 그래서 공식적으로 나온 방법이 CORS인 것입니다.  
-[(도움이 되었던 내용)](https://www.youtube.com/watch?v=yTzAjidyyqs&feature=youtu.be)
 
 ### Webpack css-loader와 style-loader
 
@@ -436,32 +374,6 @@ URL의 쿼리스트링으로 특수문자(수식 - "+", "\" 등등)를 넣을 �
   `encodeURI`는 인터넷 주소에서 사용하는 :, ;, /, =, ?, & 등을 제외하고 인코딩하는 함수이며,  
   `encodeURIComponent`는 모든 문자를 인코딩하는 함수입니다.
 
-### Optional Chaining의 활용
-
-객체의 메서드가 존재하는 경우에만 호출
-
-  ```js
-  const user1 = {
-    name: 'woo',
-    getName() {
-      return this.name;
-    },
-  };
-
-  const user2 {
-    name: 'min',
-  }
-
-  user1.getName?.(); // woo
-  user2.getName?.(); //
-  ```
-
-  user가 존재하면 user.name을 삭제한다.
-
-  ```js
-  delete user?.name;
-  ```
-
 ### Caching Decorator
 
   ```js
@@ -503,4 +415,105 @@ URL의 쿼리스트링으로 특수문자(수식 - "+", "\" 등등)를 넣을 �
 flag에는 writable, enumerbale, configurable 세 가지 속성이 있습니다.  
 이렇게 프로퍼티 각각에 대해 제어하는 방법 외에도, Object.freeze나 Object.seal과 같이 객체 내 전체 프로퍼티를 대상으로도 제약사항을 만들 수 있습니다.
 
-<!-- 12.31까지 작성 -->
+### class문법의 편의성
+
+생성자 함수를 사용하게되면 불필요하게 계속 생성되는 메서드와 같은 것들은 따로 prototype에 관리해주어 최적화하곤 합니다.
+
+  ```js
+  function User(name) {
+    this.name = name;
+  }
+  
+  User.prototype.getName = function() {
+    return this.name;
+  }
+  ```
+
+  하지만 class를 사용하게 되면 저렇게 prototype을 따로 분리해줄 필요 없이 한번에 가능합니다. contructor 함수 밖에서 선언된 것들은 모두 prototype에 저장됩니다.
+
+  ```js
+  class User {
+    constructor(name) {
+      this.name = name;
+    }
+
+    getName() {
+      return this.name;
+    }
+  }
+  ```
+
+### class의 화살표 함수 메서드
+  
+객체의 메서드로 화살표함수를 사용하면 무조건 전역 객체를 가리키는 문제가 있지만, class의 메서드로 화살표함수를 사용하면 잘 동작합니다. 뿐만아니라 콜백함수로 class의 화살표 함수 메서드를 전달해도 상위 스코프의 this를 가져와서 잘 사용할 수 있습니다.
+
+  ```js
+  class User {
+    constructor(name) {
+      this.name = name;
+    }
+
+    getName = () => {
+      console.log(this.name);
+    }
+  }
+
+  const user = new User('woomin');
+  setTimeout(user.getName, 1000); // woomin
+  ```
+
+### 소프트웨어 버전 규칙
+
+`v주.부.수`의 구성으로 되어있으며 보통 `v3.6.1`과 같이 사용합니다.  
+주(Major): 기존 버전과 호환되지 않게 API가 바뀌는 경우 변경  
+부(Minor): 기존 버전과 호환되면서 새로운 기능을 추가하는 경우 변경  
+수(Patch): 기존 버전과 호환되면서 버그를 수정한 경우 변경
+
+
+### Promise에 대한 추가적인 지식
+
+- Promise.all의 요소들 중 하나라도 reject되면 Promise.all이 반환하는 Promise는 에러와함께 바로 reject됩니다.
+- 이런 문제를 해결하고 정상적으로 fulfilled된 Promise들이라도 받고 싶다면 Promise.allSettled 메서드를 사용하면 됩니다.
+
+### Promise.then
+
+Promise.then 메서드의 첫번째 인자는 프로미스가 resolve되었을 때 실행되는 함수이고, 두번째 인자는 프로미스가 reject되었을 때 실행되는 함수입니다.
+
+  ```js
+  new Promise((resolve, reject) => {
+    ...
+  }).then(
+    (value) => console.log(`resolved ${value}`),
+    (error) => console.log(`rejected ${error}`)
+  )
+  ```
+
+### 웹 최적화 방법
+
+- **첫 페이지 로딩 지연문제 해결 방법**  
+  - HTML 파싱 방해하지 말기
+  - Build를 통한 코드 최적화 (압축 및 파일 합치기)
+  - Lazy Loading
+- **반응 지연, 애니메이션 지연 해결 방법**
+  - 메인쓰레드를 Blocking 하지 않기 위한 내부 조치 (Fiber architecture)
+  - Re-rendering 최소화 (React.memo, useCallback, useMemo)
+  - 중복 계산 줄이기 (useMemo)
+  - 네트워크 요청 캐시하기 (Service Worker, Cache header 전략)
+  - 복잡한 연산 위임하기 (Web Worker 활용)
+
+### 쿠키(Cookie)
+
+쿠키는 `세션 쿠키(Session Cookie)`와 `지속 쿠키(Persistent Cookie)`로 나뉩니다. 만료 날짜/시간을 따로 지정하지 않으면 항상 유지하라는 것으로 간주되어 지속 쿠키에 저장되고, 만료 날짜/시간을 지정하면 세션 쿠키로 저장됩니다. 세션 쿠키는 브라우저 메모리에 저장되므로 브라우저가 종료되면 쿠키는 사라지게 됩니다. 반면 지속 쿠키는 파일로 저장되므로 브라우저가 종료되어도 쿠키는 남아있게 됩니다.
+
+
+### Context vs Redux
+
+Context는 상태를 관리하는 도구가 아니라 단지 상태를 전달해주는 매커니즘일 뿐이며, 상태는 Context가 아니라 Context의 Store 안에서 useState와 useReducer를 통해 관리됩니다. `상태 관리`는 초기값을 저장하고, 현재 상태를 읽어오며, 상태를 업데이트 할 수 있는 것을 말합니다. useState와 useReducer는 훅을 통해서 초기 상태를 저장하고, 현재 상태를 읽을 수 있으며, setState아 dispatch와 같은 함수를 통해 상태를 업데이트 시킬 수 있다는 점에서 상태관리 도구가 맞습니다. 이러한 맥락에서 Redux역시 상태관리 도구입니다. Redux는 루트 reducer를 통해 초기 상태를 저장하고, store.getState() 함수를 통해 현재 상태를 읽을 수 있고, store.dispatch(action) 함수를 이용해서 상태를 업데이트 할 수 있으며, store.subscribe(listener)를 통해 store가 업데이트 되었다고 리스너에게 알릴 수 있습니다.
+
+### 이벤트 위임의 단점
+
+이벤트 위임을 사용하기 위해서는 이벤트가 반드시 버블링되어야 하지만 focus와 같은 몇몇 이벤트는 버블링되지 않으므로 사용할 수 없고, stopPropagation 메서드를 사용할 수 없습니다.
+
+
+
+<!-- 01.22까지 작성 -->
