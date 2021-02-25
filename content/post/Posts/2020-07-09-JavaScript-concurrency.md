@@ -31,20 +31,20 @@ JavaScript가 동시성으로 인해 가지고 있는 문제점은 바로 위의
 
 <br><br>
 
-## None Blocking JavaScript
+## Non-Blocking JavaScript
 
-먼저, None Blocking에 들어가기에 앞서, Blocking이란 무엇인지 간단하게 알아보도록 하겠습니다.  
+먼저, Non-Blocking에 들어가기에 앞서, Blocking이란 무엇인지 간단하게 알아보도록 하겠습니다.  
 우리가 지금 사용하는 거의 모든 컴퓨터는 폰노이만 머신입니다. 폰노이만 머신은 메모리에 적재된 명령을 순차적으로 수행하며, 그 수행하는 과정이 실행되면 중간에 중단할 수 없습니다. 이렇게 명령이 진행되고 있는 시점에서 외부의 개입을 할 수 없는 상황을 Blocking 되었다고 합니다.  
-JavaScript의 싱글쓰레드가 작업하는 방식도 Blocking 되어있다고 볼 수 있습니다. 예를 들어, run JS 부분에서 for문으로 100,000번 루프하는 코드가 존재한다면, 무조건 for문을 100,000번 모두 순회한 다음 engine work로 넘어가서 렌더링을 하기 때문에 이로인한 시간만큼 렌더링이 지연됩니다. 이를 해결하기 위해 간접적으로 Blocking을 피하는 방식이 바로 None Blocking입니다.  
+JavaScript의 싱글쓰레드가 작업하는 방식도 Blocking 되어있다고 볼 수 있습니다. 예를 들어, run JS 부분에서 for문으로 100,000번 루프하는 코드가 존재한다면, 무조건 for문을 100,000번 모두 순회한 다음 engine work로 넘어가서 렌더링을 하기 때문에 이로인한 시간만큼 렌더링이 지연됩니다. 이를 해결하기 위해 간접적으로 Blocking을 피하는 방식이 바로 Non-Blocking입니다.  
   
 ```javascript
 const working = () => {};
 
- // 일반적인 for문 10만번이 모두 순회된 뒤에 engine work로 넘어갑니다.
+// 일반적인 for문 10만번이 모두 순회된 뒤에 engine work로 넘어갑니다.
 for (let i = 0; i < 100000; i++) working();
 
 // None Blocking for문
-const noneBlockingFor = (max, load, callback) => {
+const nonBlockingFor = (max, load, callback) => {
   let i = 0;
   const f = time => {
     let cur = load;
@@ -62,5 +62,5 @@ const noneBlockingFor = (max, load, callback) => {
 
 // None Blocking for문 호출
 // 100번 순회할 때 마다 engine work로 가서 rendering합니다.
-noneBlockingFor(100000, 100, working);
+nonBlockingFor(100000, 100, working);
 ```
