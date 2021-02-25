@@ -4,13 +4,9 @@ date: 2021-02-02
 tag: ["Note"]
 ---
 
-### axios withCredential 옵션
+### withCredential 옵션
 
 CORS에서는 기본적으로 쿠키를 request headers에 넣어주지 않기 때문에, axios에 { withCredentials: true } 옵션을 넣어줌으로써 request headers에 쿠키를 넣을 수 있습니다. withCredentials는 서버에서도 response headers에 쿠키를 넣을지 말 지 정하는 옵션이기도 합니다. 즉, withCredentials 옵션은 쿠키를 보낼지 말지에 관한 것으로 볼 수 있습니다. 주의해야할 점은, withCredentials가 true라면 Access-Control-Allow-Origin을 와일드카드(*)가 아니라 직접 url을 설정해 주어야 한다는 것에 유의해야합니다.
-
-### GitHub Action
-
-[https://www.dahae.kim/blog/github-actions-cicd/](https://www.dahae.kim/blog/github-actions-cicd/)
 
 ### CSS flex-wrap
 
@@ -24,9 +20,9 @@ CSS flex-wrap property는 flex-item 요소들이 강제로 한줄에 배치되�
 - `animation-name` 을 통해 앞선 @keyframes에서 지정한 이름의 애니메이션을 엘리먼트에 적용할 수 있습니다.
 - `animation-duration` 속성을 통해 애니메이션의 최대 지속시간을 지정할 수 있습니다. 예를 들어 0% ~ 100%까지의 duration을 1초로 주면 1초 내로 0% ~ 100% 까지의 애니메이션이 완료되며, duration을 10초로 주면 1초에 10% 씩 진행됩니다.
 - `animation-iteration-count` 속성을 통해 애니메이션을 몇 번 반복시킬 지 정할 수 있습니다. 값으로 infinite를 사용하면 무한으로 반복됩니다.
-- `animation-fill-mode` 속성으로 애니메이션이 끝났을 때의 엘리먼트 위치를 지정해줄 수 있습니다. 값으로 none, forward, backward, both를 지정할 수 있으며, 제가 슬라이드 애니메이션을 사용하기에는 딱 슬라이드되어 나온 뒤 그 자리에 멈춰있어야하므로, 즉 엘리먼트가 애니메이션이 끝난 지점의 위치를 그대로 수용해야하므로 forward가 어울립니다.
-
-아래는 이에 대한 코드입니다. 이렇게 하면 가로세로 100px 짜리 정사각형이 색을 바꾸며 이동한 뒤 멈춥니다.  
+- `animation-fill-mode` 속성으로 애니메이션이 끝났을 때의 엘리먼트 위치를 지정해줄 수 있습니다. 값으로 none, forward, backward, both를 지정할 수 있으며, 제가 슬라이드 애니메이션을 사용하기에는 딱 슬라이드되어 나온 뒤 그 자리에 멈춰있어야하므로, 즉 엘리먼트가 애니메이션이 끝난 지점의 위치를 그대로 수용해야하므로 forward가 어울립니다.  
+<br>
+  아래는 이에 대한 코드입니다. 이렇게 하면 가로세로 100px 짜리 정사각형이 색을 바꾸며 이동한 뒤 멈춥니다.  
 
   ```css
   div {
@@ -61,7 +57,7 @@ position은 총 4가지가 있습니다.
 
 ### document.elementFromPoint(x, y)
 
-elementFromPoint를 이용하여 해당 좌표에 맞는 돔을 찾을 수 있습니다. 예제는 다음과 같습니다.
+elementFromPoint를 이용하여 해당 좌표에 맞는 DOM을 찾을 수 있습니다. 예제는 다음과 같습니다.
 
   ```js
   window.addEventListener('mousemove', (event) => {
@@ -514,6 +510,191 @@ Context는 상태를 관리하는 도구가 아니라 단지 상태를 전달해
 
 이벤트 위임을 사용하기 위해서는 이벤트가 반드시 버블링되어야 하지만 focus와 같은 몇몇 이벤트는 버블링되지 않으므로 사용할 수 없고, stopPropagation 메서드를 사용할 수 없습니다.
 
+### 이미지 Lazy Loading 구현하기
+
+처음부터 모든 이미지를 로드하는 게 아니라, 이미지들이 해당 뷰포트에 위치할 때 로드되도록 구현하여 Lazy Loading을 구현해보았습니다.
+
+  ```js
+  const INITIAL_SHOWING_COUNT = 10;
+  const images = await loadImagesFromServer();
+
+  app.innerHTML = `
+    <div>
+      ${images.map((image, index) => `
+        <img
+          src=${index < INITIAL_SHOWING_COUNT ? '' : image.url}
+          data-src=${image.url}
+        />
+      `)}
+    </div>
+  `;
+  ```
+
+  img의 dataset에 해당 이미지의 url을 넣어놓습니다. 그리고 스크롤 이벤트로 해당 이미지가 뷰포트에 위치할 때 로드해줄 것입니다. INITIAL_SHOWING_COUNT는 Lazy Loading을 하지 않는 첫 화면에 필요한 이미지들을 구분짓기 위해 사용합니다.
+
+  ```js
+  const lazyLoadingEvent = () => {
+    const lazyImages = document.querySelectorAll('img');
+  
+    lazyImages.forEach(image => {
+      const currentWindowYPosStart = window.pageYOffset;
+      const currentWindowYPosEnd = currentWindowYPosStart + window.innerHeight;
+  
+      if (image.offsetTop < currentWindowYPosEnd) {
+        image.src = image.dataset.src; // image의 src에 url를 주입해줍니다.
+      }
+    });
+  };
+
+  window.addEventListener('scroll', lazyLoadingEvent);
+  ```
+
+  하지만 이렇게 구현하면 스크롤 이벤트가 너무 잦게 발생하므로 쓰로틀링도 걸어주었습니다.
+
+  ```js
+  const throttle = (callbackEvent, ms) => {
+    let flag = true;
+
+    return (e) => {
+      if (!flag) return;
+
+      callbackEvent(e);
+      flag = false;
+      setTimeout(() => { flag = true }, ms);
+    };
+  };
+
+  window.addEventListener('scroll', throttle(lazyLoadingEvent, 200));
+  ```
+
+  이렇게 함으로써 제가 임시 구현한 페이지에서 맨 밑까지 내리는데 약 60번 발생했던 이벤트를 15회까지 줄일 수 있었습니다.
+
+### 여러개의 노드를 append하는 방법
+
+appendChild 메서드로는 불가능하고 append 메서드로는 가능합니다.
+
+  ```js
+  const newNodes = data.map(text => {
+    const node = document.createElement('div');
+    node.innerText = text;
+  });
+
+  document.body.append(...newNodes);
+  ```
+
+### \<textarea\>의 기본 여백
+
+textarea는 inline 속성이기 때문에 아래에 기본 여백이 존재합니다. display: block을 줌으로써 없앨 수 있습니다.
 
 
-<!-- 01.22까지 작성 -->
+### px, em, rem
+
+px은 항상 고정된 픽셀 단위로 정해지는 것을 말하며, em과 rem은 폰트 사이즈에 따라 정해집니다. 예를 들어 폰트 사이즈가 16px이라면 1em과 1rem은 모두 16px을 의미하게 됩니다.  
+em과 rem의 차이점은, em의 경우 해당 엘리먼트의 폰트 사이즈를 기준으로 한다는 점, rem은 \<html\> 요소의 폰트 사이즈(없다면 브라우저의 설정값)를 기준으로 한다는 것입니다. 참고로 일반적으로 브라우저와 \<html\> 요소의 폰트 사이즈는 기본이 16px입니다.
+
+### 반응형 웹의 기준 픽셀
+
+- 320px (smaller phone viewpoints)
+- 480px (small devices and most phones)
+- 768px (most tablets)
+- 992px (smaller desktop viewpoints)
+- 1200px (large devices and wide screens)
+
+
+### 기본적인 HTML 지식
+
+- **language code**  
+  language code는 선택사항이지만 작성하는 것이 접근성 측면에서 좋습니다.
+
+    ```html
+    <html lang='ko'></html>
+    ```
+
+- **meta 데이터**  
+  meta data는 다른 문서나 다른 머신에게 해당 문서(HTML)에 대한 정보를 제공하는 데이터입니다.
+
+- **\<head\> 요소에 필요한 것들**  
+  head 요소에는 3가지 요소가 필수적으로 들어갑니다.
+
+    ```html
+    <head>
+      <title>Document Title</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="initial-scale=1, width=divice-width">
+    </head>
+    ```
+
+  - 먼저 \<title\>에는 해당 문서의 제목을 명시하게되며,  
+  - \<meta charset="UTF-8"\>에는 해당 문서의 Character Set을 명시해주게됩니다. 만약 Character Set을 명시하지 않으면 글자가 깨질 수 있기에 필수적입니다.
+  - \<meta name="viewport"\>에는 처음 이 문서가 렌더링 될 때 어떤 식으로 렌더링될지를 명시하는 용도입니다. 모바일이나 태블릿PC에 대응하기 위해서 반드시 필요합니다.
+
+- **SEO에 도움을 주는 meta data description**  
+  
+    ```html
+    <meta name="description" content="메타데이터 요소에 대한 설명을 다루는 웹 페이지 입니다.">
+    ```
+
+- **시멘틱 HTML**  
+  - heading(\<h1\>, \<h2\>, ...)을 사용하여 콘텐츠의 제목을 나타낼 수 있습니다.
+  - \<article\>, \<section\> 요소는 페이지의 구역을 나누는 데 사용됩니다. 대부분의 \<div\>는 이것들로 대체할 수 있습니다.  
+    아울러 \<section\> 요소 내부에는 CSS로 가리는 한이 있더라도 heading을 명시해주는 게 좋습니다.
+  - \<header\>, \<footer\>, \<nav\>, \<aside\> 요소는 각각 용법에 따라 적극적으로 사용합니다.
+  - \<hgroup\> 요소를 통해 heading을 그루핑 할 수 있습니다.
+  - \<address\> 요소를 사용하여 페이지 copyright, 출처, 기타 등등을 담을 수 있습니다.
+
+
+### 크롬 브라우저의 내부
+
+- 크롬은 브라우저 프로세스(브라우저의 UI 부분), 렌더러 프로세스(웹 사이트가 표시되는 모든 부분), 플러그인 프로세스(Flash 같은 웹 사이트에서 사용하는 플러그인), GPU 프로세스 등 여러 개의 프로세스로 이루어져 있습니다.
+- 크롬은 예전에는 탭마다 렌더러 프로세스를 할당했지만, 이제는 사이트(iframe에 있는 사이트 포함)마다 렌더러 프로세스를 할당한다고 합니다.
+- 이렇게 다중 프로세스 아키텍처를 사용하게 되면, 어떤 탭(사이트)에 문제가 생겨도 다른 탭에 영향을 주지 않을 수 있어서 안정적이고 좋은 사용자 경험을 제공할 수 있습니다. 하지만 프로세스간 메모리 공유가 되지 않아서 메모리를 많이 사용하게 된다는 단점이 생기게 됩니다.
+- 크롬은 이와 같은 단점을 최소화 하기 위해 성능 좋은 하드웨어에서 크롬이 실행중일 때는 각 서비스를 여러 프로세스로 분할해 안정성을 높이고, 리소스가 제한적인 장치에서 실행중일 때는 여러 서비스를 하나의 프로세스에서 실행해서 메모리 사용량을 줄입니다.
+
+### 전위순회와 후위순회
+
+  ```js
+  // 전위순회
+  const preorder = (node) => {
+    if (!node) {
+      return [];
+    }
+    
+    return [
+      node.number,
+      ...preorder(node.leftChild),
+      ...preorder(node.rightChild),
+    ];
+  }
+
+  // 후위순회
+  const postorder = (node) => {
+    if (!node) {
+      return [];
+    }
+    
+    return [
+      ...postorder(node.leftChild),
+      ...postorder(node.rightChild),
+      node.number,
+    ];
+  }
+  ```
+
+### forEach에 대한 추가적인 지식
+
+ES6이후의 forEach와 같이 순회하는 것들은 복사본을 돌립니다. 따라서 다음은 문제가 생기지 않습니다.
+
+  ```js
+  const arr = [1, 2, 3, 4];
+
+  arr.forEach((v, i) => {
+    arr.splice(i, 1);
+  });
+  ```
+
+### TTFB
+
+TTFB란 Time To First Byte로, HTTP 요청을 보냈을 때 처음 byte(정보)가 브라우저에 도달하기까지의 시간을 말합니다. 즉, TTFB는 서버 프로세싱, DNS, TCP 등등이 복합적으로 수행된 시간을 나타내주는 수치라고 볼 수 있습니다.
+
+
+<!-- 02.16까지 작성 -->
