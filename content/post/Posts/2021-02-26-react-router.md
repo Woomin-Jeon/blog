@@ -173,7 +173,7 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
 
   import RouterContext from './context/RouterContext';
 
-  export default function Switch() {
+  export default function Switch({ children }) {
     const { location } = useContext(RouterContext);
 
     const childrenType = toString.call(children);
@@ -217,13 +217,13 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
 
   <br>
 
-  그러면 다음과 같이 하나의 컴포넌트만 잘 출력되는 것을 확인할 수 있습니다.
+  그러면 다음과 같이 첫번째로 매칭되는 하나의 컴포넌트만 잘 출력되는 것을 확인할 수 있습니다.
 
   ![2](https://user-images.githubusercontent.com/59194356/109265815-7d4c5680-784a-11eb-84e7-767e51f97104.gif)
 
   <br>
 
-  이렇게 \<Router\>, \<Switch\>, \<Route\> 모듈을 구현해보았습니다.  
+  이렇게 \<Router\>, \<Switch\>, \<Route\> 컴포넌트를 구현해보았습니다.  
   하지만 지금은 URL을 이동할 때마다 새롭게 페이지가 로드되고 있기 때문에 이를 history API를 사용하여 개선해보도록 하겠습니다.
 
 <br>
