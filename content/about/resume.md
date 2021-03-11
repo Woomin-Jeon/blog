@@ -101,9 +101,14 @@ layout: about
 
 ## 읽고 싶은 책
 
-- Code Complete 코드 컴플리트 2 - 스티브 맥코넬
 - Clean Code - 로버트C. 마틴
 - Effective Java - 조슈아 블로크
+- **Code Complete 코드 컴플리트 2 - 스티브 맥코넬**
+- **실용주의 프로그래머 - 앤드류 헌트**
+- **TDD by example: Evaluating an expression - Popescu, Marcel / Howden, Simon**
+- **익스트림 프로그래밍 - 켄트 벡**
+- **The Nature of Software Development - 론 제프리스**
+- **클린 코더 - 로버트 마틴**
 - 리펙터링 - 마틴 파울러
 - 함께 자라기 (애자일로 가는 길) - 김창준
 - You don't know JS - 카일 심슨
@@ -111,7 +116,7 @@ layout: about
 - CSS3(세상에 없던 가장 꼼꼼한 메뉴얼) - 데이빗 소여 맥팔랜드
 - 함수형 자바스크립트 - 루이스 아텐시오
 - 성공과 실패를 결정하는 1%의 네트워크 원리 - Tsutomu Tone
-- 함께 자라기(애자일로 가는 길) - 김창준
+- 프레임워크 없는 프론트엔드 개발 - 프랜세스코 스트라출로
 
 <br>
 
