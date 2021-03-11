@@ -80,3 +80,19 @@ tag: ["Note"]
       },
     };
     ```
+
+## Webpack
+
+- **Module not found: Error: Can't resolve ...**  
+  분명 path를 제대로 설정했는데도 해당 에러가 발생한다면... 아마 webpack의 resolve extensions를 설정해주지 않은 것은 아닌지 확인해보면 좋을 것 같습니다.  
+  resolve extensions는 import 할 때 확장자를 붙이지 않아도 되도록 하는 역할을 합니다.
+
+    ```js
+    module.exports = {
+      ...
+      resolve: {
+        extensions: ['.js', '.jsx'],
+      },
+      ...
+    };
+    ```
