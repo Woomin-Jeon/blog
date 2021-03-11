@@ -696,5 +696,49 @@ ES6이후의 forEach와 같이 순회하는 것들은 복사본을 돌립니다.
 
 TTFB란 Time To First Byte로, HTTP 요청을 보냈을 때 처음 byte(정보)가 브라우저에 도달하기까지의 시간을 말합니다. 즉, TTFB는 서버 프로세싱, DNS, TCP 등등이 복합적으로 수행된 시간을 나타내주는 수치라고 볼 수 있습니다.
 
+### dialog 태그로 모달창 구현하기
 
-<!-- 02.16까지 작성 -->
+\<dialog\>태그를 활용해서 모달창을 쉽게 구현할 수 있습니다. 하지만 지원율이 낮다는 단점이 있으므로 유의해야 합니다.
+
+  ```html
+  <dialog>
+    <div>모달창 하위</div>
+    <button id="close">닫기</button>
+  </dialog>
+  <button id="open">열기</button>
+
+  <script>
+    const dialog = document.querySelector('dialog');
+    const openButton = document.querySelector('#open');
+    const closeButton = document.querySelector('#close');
+
+    openButton.addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener('click', () => {
+      dialog.close();
+    });
+  </script>
+  ```
+
+  caniuse.com에 찾아보니 지원이 그래도 꽤 되는데 IE랑 파이어폭스가 안되고... 가장 결정적으로 사파리가 안되네요. 그렇다보니 당연히 IOS 사파리도 안돌아가고... 사실상 아직은 쓰기엔 무리가 있을듯 합니다.
+
+### JavaScript 정규식
+
+- `/[]/` 문자셋
+- `/[0-9]/` 숫자인 애들만
+- `/[\d]/` 숫자인 애들만
+- `/[\D]/` 숫자가 아닌 애들만
+- `/[a-zA-Z]/` 문자인 애들만
+- `/[\w]/` 문자인 애들만
+- `/[\W]/` 문자가 아닌 특수문자만
+- `/[\s]/` 공백인 애들만
+- `/[\S]/` 공백이 아닌 애들만
+- `.` 1개의 글자를 나타냄 (/a.c/ 는 abc, aac 등과 매치됨)
+- `\` 0개 이상의 글자를 나타냄 (/ab*c/는 ac, abc, abbc, abbbc 등과 매치됨)
+- `*` 0개이거나 1개인 글자를 나타냄 (/ab?c/ 는 ac와 abc 등과 매치됨)
+- `+` 앞에있는 문자가 연속됨을 나타냄 (/a+/ 는 a, aa, aaa 등과 매치됨)
+- `\d{3, 4}` 연속되는 숫자가 3개 혹은 4개인 것들을 나타냄
+
+<!-- 02.28까지 작성 -->
