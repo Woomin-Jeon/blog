@@ -97,12 +97,13 @@ layout: about
 - 실전 리액트 프로그래밍
 - 운영 체제와 정보 기술의 원리
 - 프레임워크 없는 프론트엔드 개발
+- 함께 자라기 (애자일로 가는 길)
+- Clean Code - 로버트C. 마틴
 
 <br>
 
 ## 읽고 싶은 책
 
-- Clean Code - 로버트C. 마틴
 - Effective Java - 조슈아 블로크
 - **Code Complete 코드 컴플리트 2 - 스티브 맥코넬**
 - **실용주의 프로그래머 - 앤드류 헌트**
@@ -111,7 +112,6 @@ layout: about
 - **The Nature of Software Development - 론 제프리스**
 - **클린 코더 - 로버트 마틴**
 - 리펙터링 - 마틴 파울러
-- 함께 자라기 (애자일로 가는 길) - 김창준
 - You don't know JS - 카일 심슨
 - CODE 코드 - 찰스 펫졸드
 - CSS3(세상에 없던 가장 꼼꼼한 메뉴얼) - 데이빗 소여 맥팔랜드
