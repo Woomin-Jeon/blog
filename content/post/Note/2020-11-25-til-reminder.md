@@ -1,11 +1,54 @@
 ---
 title: "TIL 복습할 내용"
-date: 2021-02-02
+date: 2021-08-29
 tag: ["Note"]
 ---
 
-<!-- 03.15까지 작성 -->
+<!-- 08.29까지 작성 -->
 
+### React Fiber
+
+React Fiber에 대한 아티클을 읽고 정리해보았습니다.  
+  - 돔을 조작하는 로직이 많아지면 콜스택에 아직 로직이 쌓여있기 때문에 렌더링이 일어날 수 없습니다.
+  - 이로인해 렌더링이 밀리면서 애니메이션 같은 것들이 버벅이게 됩니다.
+  - Fiber는 여기서 렌더링과 같은 비동기처리들이 밀리지 않게 하기 위해 리액트 코드를 실행 중에 중단시키고 이벤트 큐에서 대기하는 태스크들을 처리한 뒤, 다시 실행중이던 리액트 코드의 위치로 돌아가서 처리할 수 있도록 합니다.
+  - 이를 통해 돔을 조작하는 로직이 많아져도 자연스럽게 애니메이션이 진행될 수 있도록 합니다.
+  - 이때 리액트 코드 중간에 비동기 처리를 실행하기 위한 방법으로 `requestIdleCallback` 함수를 사용해서 리액트 코드를 호출하며, 실행중이었던 위치로 돌아오기 위해 stack을 구현하여 사용합니다.
+  - 참고로 `requestIdleCallback의` 폴리필은 `setTimeout 0`을 이용합니다.
+
+### 정규식으로 이름있는 그루핑 하기
+
+  ```js
+  const { app, path } = /app=(?<app>.*)&path=(?<path>.*)/.exec(scheme)?.groups ?? {}
+  ```
+
+### touch 스크롤 막기
+
+addEventListener의 `passive: true` 옵션은 브라우저에게 preventDefault()를 호출하지 않겠다고 알리는 역할을 합니다. 브라우저는 스크롤링을 발생시키는 이벤트를 감지했을 때 먼저 모든 핸들러를 처리하는데, 이때 preventDefault가 어디에서도 호출되지 않았다고 판단되면, 그제야 스크롤링을 진행합니다. 이 과정에서 불필요한 지연이 생기고, 화면이 "덜덜 떨리는" 현상이 발생합니다. `passive: true` 옵션은 핸들러가 스크롤링을 취소하지 않을 것이라는 정보를 브라우저에게 알려주는 역할을 합니다. 이 정보를 바탕으로 브라우저는 화면을 최대한 자연스럽게 스크롤링 할 수 있게 하고 이벤트는 적절하게 처리됩니다.  
+([출처: 모던자바스크립트 튜토리얼](https://ko.javascript.info/default-browser-action))
+
+### 타입 가드  
+
+타입 가드 함수의 네이밍은 `is타입`과 같은 형식으로 작성합니다.
+
+  ```ts
+  const isApple = (fruit: Fruit): fruit is Apple => 'apple' in fruit // 타입 가드 함수
+
+  if (isApple(data)) {
+    console.log(data.apple) // 타입추론 가능
+    return;
+  }
+
+  console.log(data.banana) // 타입추론 가능
+  ```   
+
+### 패키지를 만들 때 주의해야 할 점
+
+- `peerDependancy`란 어떤 패키지를 배포하고 누군가 제 패키지를 설치할 때, 제 패키지에 존재하는 peerDependancies를 dependency로 설치해야함을 의미합니다. Yarn 공식문서를 보면 peerDependancies가 자신만의 패키지를 배포할 때 사용하게 되는 dependencies 종류라고 하네요.
+    - dependencies : yarn install 시에 설치된 버전을 체크해 기존것이 있더라도 선언된걸 우선적으로 쓰고, 없으면 같이 설치됨
+    - devDependencies : yarn install 시에 같이 설치됨
+    - peerDependnecies : yarn install 시에 기존 것이 있으면 그걸 씀 (없으면 같이 설치됨: 근데 이건 패키지 매니저별로 동작이 다름) 
+- 패키지를 배포할 때 webpack.config.js의 `externals` 옵션을 사용하면 denpandencies들을 번들파일에서 뺄 수 있습니다. 만약 이를 빼지 않는다면 dependency 코드들이 번들파일에 포함되게 되고, 만약 해당 패키지를 사용하는 쪽에서 동일한 dependancy를 가지는 패키지를 사용한다면 중복코드가 발생하게 됩니다. 따라서 패키지를 번들링하여 배포할 때는 externals 옵션을 이용해서 제거하는 게 좋습니다.
 
 ### Caching Decorator
 
