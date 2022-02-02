@@ -1,15 +1,11 @@
 ---
-title: "[React] 시간이 맞는 타이머 구현하기"
+title: "시간이 맞는 타이머 구현하기 (React)"
 date: 2021-02-17
 category: "All"
-draft: true
+draft: false
 ---
 
-<br><br>
-
 개인적인 프로젝트로 뽀모도로 타이머를 구현해보고 있었는데, 시간이 지날수록 타이머가 느려지는 문제가 있어서 이를 해결한 과정을 소개합니다.
-
-<br>
 
 ## setTimeout VS setInterval
 
@@ -37,8 +33,6 @@ draft: true
     return <div>{timer}</div>
   }
   ```
-
-<br><br>
 
 ## 하지만 타이머가 느려지는 문제 발견
 
@@ -104,5 +98,3 @@ draft: true
   ```
 
   이 방식은 약 1초에 한 번씩만 setTimeout을 호출하게 되며 이전에 setInterval을 1초에 10번씩 호출했던 것에 비해 효율적이고, 오차를 직접 계산해서 보정해준다는 점 때문에 직접 확인해본 결과 평균적으로 약 8ms 정도의 오차만큼이 났습니다.
-
-<br><br>

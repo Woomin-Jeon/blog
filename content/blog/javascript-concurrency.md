@@ -1,8 +1,8 @@
 ---
-title: "[JavaScript] JavaScript의 동시성과 병행성"
+title: "JavaScript의 동시성과 병행성"
 date: 2020-07-09
 category: "All"
-draft: true
+draft: false
 ---
 
 `참고` Bsidesoft의 맹기완 대표님의 [코드스피츠 85 거침없는 자바스크립트 2회차](https://www.youtube.com/watch?v=zxWxr1wQLg8&t=3162s)를 보고 이해한 바를 정리해본 내용입니다.

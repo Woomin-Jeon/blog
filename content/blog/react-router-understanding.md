@@ -1,19 +1,15 @@
 ---
-title: "[React] react-router 구현하며 이해하기"
+title: "react-router 구현하며 이해하기"
 date: 2021-02-26
 category: "All"
-draft: true
+draft: false
 ---
-
-<br><br>
 
 ## 동기
 
 react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈를 처리하는 방법을 찾아보다가 서버에서 해당 index.html 파일을 내려주면 해결할 수 있다는 것을 알게되었습니다. 하지만 index.html 파일을 내려주면 왜 해결되는지를 알지 못하고 있어서 이를 이해해보고자 react-router 코드를 뜯어보고 직접 구현해보기로 마음먹었습니다.  
   
 제가 [react-router GitHub 소스코드](https://github.com/ReactTraining/react-router)를 읽으면서 이해한 내용을 바탕으로 간단하게 react-router(BrowserRouter, Switch, Route, useHistory)를 구현해보았고, 다른 분들께 도움이 되길 바라면서 해당 포스팅을 작성합니다.
-
-<br>
 
 ## 초기 페이지 구현하기
 
@@ -59,8 +55,6 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
   }
   ```
 
-<br>
-
 ## \<Router\>와 \<Route\> 구현하기
 
 다음으로 URL path에 맞게 해당 컴포넌트를 조건부렌더링 해줄 수 있도록 \<Router\>와 \<Route\> 컴포넌트를 구현해보겠습니다. 이때, Router(부모)에서 관리하는 상태(location)를 Route(자식)에게 전송하도록 하기 위해서 ContextAPI로 RouterContext를 먼저 구현합니다.
@@ -74,8 +68,6 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
 
   export default RouterContext;
   ```
-
-  <br>
 
   다음으로 해당 RouterContext를 이용하여 \<Router\>를 구현합니다.
 
@@ -99,8 +91,6 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
 
   여기서 `location`은 현재 URL을 토대로 화면에 컴포넌트를 갱신할 때 사용하기 위한 상태값입니다.  
 
-  <br>
-
   \<Route\> 역시 RouterContext를 토대로 location 값을 불러와서 자신의 path와 매칭되면 렌더링하고, 일치하지 않으면 렌더링하지 않도록 구현합니다.
 
   ```js
@@ -118,8 +108,6 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
       : null;
   }
   ```
-
-  <br>
 
   마지막으로 앞서 구현한 \<Router\>와 \<Route\>를 App.jsx 파일에 적용하고, \<Navigator\>에도 URL 이동 로직을 추가합니다.
 
@@ -153,15 +141,11 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
   }
   ```
 
-  <br>
-
   그러면 다음과 같이 **/**의 경우에는 Home, Login, About 컴포넌트 모두 URL이 매칭되므로 세 컴포넌트를 렌더링하게 되고,  
   **/login**의 경우에는 Login 컴포넌트만,  
   **/about**의 경우에는 About 컴포넌트만 렌더링하는 것을 확인할 수 있습니다.
 
   ![1](https://user-images.githubusercontent.com/59194356/109264628-9eac4300-7848-11eb-8522-2b4fc06dd450.gif)
-
-<br>
 
 ## \<Switch\> 구현하기
 
@@ -189,8 +173,6 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
   `children`으로 들어오는 컴포넌트가 하나일 경우에는 해당 리액트 엘리먼트가 들어오지만, 여러개일 때는 배열에 감싸져서 들어오기 때문에 하나가 들어오든 여러개가 들어오든 잘 대응할 수 있도록 하기위해 `toString.call()`을 이용해서 타입을 검사하고 배열로 `routes` 변수를 설정합니다.  
   (참고로 실제 react-router 소스코드에서는 첫번째 매칭되는 컴포넌트를 find 메서드로 찾지 않고, forEach 메서드를 이용해서 찾지만 저는 간편하게 구현하기 위해 find를 사용하였습니다)
 
-  <br>
-
   이제 \<Switch\>를 App.jsx에 적용합니다.
 
   ```js
@@ -216,18 +198,12 @@ react-router의 BrowserRouter를 사용하다가 발생한 `Cannot GET /` 이슈
   }
   ```
 
-  <br>
-
   그러면 다음과 같이 첫번째로 매칭되는 하나의 컴포넌트만 잘 출력되는 것을 확인할 수 있습니다.
 
   ![2](https://user-images.githubusercontent.com/59194356/109265815-7d4c5680-784a-11eb-84e7-767e51f97104.gif)
 
-  <br>
-
   이렇게 \<Router\>, \<Switch\>, \<Route\> 컴포넌트를 구현해보았습니다.  
   하지만 지금은 URL을 이동할 때마다 새롭게 페이지가 로드되고 있기 때문에 이를 history API를 사용하여 개선해보도록 하겠습니다.
-
-<br>
 
 ## useHistory 구현하기
 
@@ -284,8 +260,6 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
   - `listen` 메서드를 통해서 매개변수로 들어오는 리스너를 등록할 수 있고
   - `push`에서는 history API를 사용하여 클라이언트 라우팅을 수행하게 됩니다. 그리고 Listeners에 등록된 함수들을 실행시킵니다.  
 
-  <br>
-
   이제 history 객체를 얻어올 수 있으니 본격적으로 useHistory를 구현해보도록 하겠습니다.  
   아까 RouterContext를 이용해 location 변수를 전달했던 것처럼, HistoryContext를 생성해서 history 객체를 전달하도록 해보겠습니다.
 
@@ -298,8 +272,6 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
 
   export default HistoryContext;
   ```
-
-  <br>
 
   \<BrowserRouter\>를 만들어서 아까 만든 history 모듈을 통해 history 객체를 생성한 뒤 \<Router\>의 props로 전달합니다.
 
@@ -320,8 +292,6 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
     );
   }
   ```
-
-  <br>
 
   \<Router\>에서는 받아온 history 객체에 상태 변경 로직을 등록합니다.
 
@@ -363,8 +333,6 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
   아울러 뒤로가기 버튼에 대해서도 history API가 처리할 수 있도록 역시 `useEffect` 훅으로 `popstate`에 대한 로직도 구현해줍니다.  
   마지막으로 아까 구현했었던 HistoryContext를 사용하여 `children`에게 history 객체를 전달합니다.
 
-  <br>
-
   이제 진짜로 useHistory 훅을 구현합니다. 훅 자체는 구현이 어렵지 않습니다.
 
   ```js
@@ -383,7 +351,6 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
 
   ContextAPI를 사용하여 history 객체를 디스트럭처링해서 얻어온 뒤 반환합니다.
 
-  <br>
 
   마지막으로 App.jsx에 적용합니다.
 
@@ -420,25 +387,16 @@ react-router에서는 history 모듈을 사용해서 history 객체를 만들고
   useHistory 훅을 사용하기 위해서는 \<BrowserRouter\> 내부에 존재해야 하므로 \<Navigator\> 컴포넌트를 \<BrowserRouter\> 내부로 이동시킵니다.  
   \<Navigator\>에서 URL 변경 로직을 useHistory로 변경합니다.
 
-  <br>
-
   새로고침 없이 라우터가 잘 동작하는 것을 확인할 수 있습니다.
 
   ![3](https://user-images.githubusercontent.com/59194356/109270620-a7eddd80-7851-11eb-99a8-a61a246c4c31.gif)
-
-<br>
-<br>
 
 ## 마무리
 
 이상으로 react-router를 간단하게 구현해보았습니다.  
 부족한 설명 들어주셔서 감사합니다.  
   
-<br>
-
 해당 소스코드의 전체는 [https://github.com/Woomin-Jeon/custom-react-router](https://github.com/Woomin-Jeon/custom-react-router)에서 확인하실 수 있습니다.
   
 [react-router GitHub 소스코드](https://github.com/ReactTraining/react-router)  
 [history GitHub 소스코드](https://github.com/ReactTraining/history)
-
-<br><br><br>

@@ -1,8 +1,8 @@
 ---
-title: "[Auth] passport 없이 GitHub OAuth 구현하기"
+title: "passport 없이 GitHub OAuth 구현하기"
 date: 2020-11-09
 category: "All"
-draft: true
+draft: false
 ---
 
 OAuth 인증 방식의 학습을 위해서 passport 라이브러리를 사용하지 않고 GitHub OAuth를 구현해보기로 하였습니다. 참고한 OAuth 흐름은 다음과 같습니다.

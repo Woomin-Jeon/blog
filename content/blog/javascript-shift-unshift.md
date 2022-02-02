@@ -1,8 +1,8 @@
 ---
-title: "[JavaScript] 배열의 특징 (shift, unshift의 효율성에 대한 제고)"
+title: "JavaScript shift, unshift의 효율성에 대한 제고"
 date: 2020-06-16
 category: "All"
-draft: true
+draft: false
 ---
 
 ## 들어가기
@@ -10,13 +10,9 @@ draft: true
 저는 지금까지 JavaScript의 배열은 사실 객체이기 때문에, 일반적인 배열의 역할도 하며 리스트의 역할도 하는것으로 알고 있었습니다. 그렇기 때문에 인덱스를 통한 접근이 자유롭게 가능하고, push, pop, shift, unshift와 같은 배열의 추가 제거도 자유롭다고 생각했습니다.  
 그런데 최근에 Problem Solving을 하던 중 shift와 unshift의 좋지 않은 효율성을 발견하게 되었습니다. 이에 따라 push와 pop의 효율성도 살펴보았는데 이 둘은 괜찮았습니다. 리스트의 역할이 가능하다면 `push-pop`과 `shift-unshift`의 차이는 없어야 할텐데 도대체 왜 이 둘의 효율이 다른 것일까요?
 
-<br><br><br>
-
 ## shift-unshift의 좋지 않은 효율성
 
 100,000개의 데이터를 push, pop, shift, unshift로 처리했을 때의 처리 시간을 보겠습니다.
-
-<br>
 
 #### push
 
@@ -70,8 +66,6 @@ draft: true
   }
   ```
 
-<br><br><br>
-
 ## 결과
 
 |  push  |   pop  |    shift  |  unshift  |
@@ -81,8 +75,6 @@ draft: true
 | 7.15ms | 6.87ms | 3633.24ms | 2832.80ms |
 | 6.19ms | 7.18ms | 3630.10ms | 2697.41ms |
 | 6.86ms | 7.03ms | 3545.95ms | 2833.13ms |
-
-<br><br><br>
 
 ## 왜 shift-unshift는 효율이 좋지 않을까?
 
@@ -100,8 +92,6 @@ draft: true
 하지만 JavaScript의 배열은 일반적인 의미의 배열과 다릅니다. 배열의 요소를 위한 각각의 메모리 공간은 동일한 크기를 갖지 않아도 되며, 연속적으로 이어져 있지 않습니다(리스트 형태). 이와 같이 배열의 요소가 연속적으로 이어져 있지 않는 배열을 `희소 배열(sparse array)`이라고 합니다.  
 JavaScript 같은 희소 배열이 밀집배열에 비해 가지고 있는 장점은 삽입과 제거의 연산이 더 빠르게 가능하다는 것입니다. 중간중간 메모리가 비어있기 때문에 그 사이에 삽입을 하거나 제거함으로써 다른 요소들을 건드리지 않고 삽입과 제거를 수행할 수 있습니다.  
 즉, JavaScript의 배열은 일반적인 배열의 동작을 흉내낸, index와 length를 프로퍼티로 가지고 있는 특수한 객체입니다. 그렇기 때문에 `JavaScript 배열의 "index"는 메모리를 참조하기 위해 사용되는 Hash Key 역할도 하지만, 데이터의 "순서"를 보장하는 프로퍼티의 역할도 한다는 것`입니다.
-
-<br><br><br>
 
 ## 결론
 

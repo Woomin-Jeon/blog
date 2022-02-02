@@ -1,11 +1,9 @@
 ---
-title: "[Git] Merge commit Revert 하기"
+title: "Merge commit Revert 하기"
 date: 2021-04-24
 category: "All"
-draft: true
+draft: false
 ---
-
-<br><br>
 
 ## 작성 동기
 
@@ -25,7 +23,6 @@ draft: true
   
 결과적으로는 이 방법으로 해결은 했습니다. 하지만 로컬에서 reset을 사용하여 커밋들을 자르다보니 remote에 올릴 때 충돌이 생기게되어 force push를 계속 하게되었고, 이로인해 실수가 생기면 remote에 있는 코드에 문제가 생길 위험이 너무 컸습니다. 아울러 commit의 순서가 바뀌는 등 부작용도 있어서 다음부터는 revert를 사용하기로 결심했고, 이에 대해 공부와 실습을 해보았습니다.
 
-<br>
 
 ## Revert란?
 
@@ -57,7 +54,6 @@ $ git push origin master -f
 
 이렇게 `commit 3`가 완전히 사라지게 되고, remote에는 `commit 3`가 존재하기 때문에 충돌로 인해 push 할 수 없어서 force push를 해야하게 됩니다.
   
-<br>
   
 반면, revert를 사용하게 되면
 
@@ -99,7 +95,6 @@ $ git push origin master
 $ git revert d4d4d4
 ```
 
-<br>
 
 ## Merge commit Revert 하기
 
@@ -150,10 +145,8 @@ $ git log
 
 이렇게 revert된 버전의 commit이 하나 더 생성되고, A의 merge commit과 merge commit에 들어있던 commit들은 모두 사라지게 됩니다.  
 
-<br>
 
 ## 마치며
 
 따라서, 앞선 작성 동기에 제가 겪었던 문제는 Revert를 통해 A merge commit을 제거하고, production에 배포를 진행한 뒤, Revert했던 commit을 다시 Revert 해줌으로써 해결할 수 있었을 것 같습니다. 앞으로는 더 안전하고 예측가능한 Revert를 사용하는 습관을 갖도록 해야겠습니다.
 
-<br><br>

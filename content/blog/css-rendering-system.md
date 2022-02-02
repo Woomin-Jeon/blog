@@ -1,11 +1,9 @@
 ---
-title: "[CSS] CSS Rendering"
+title: "CSS Rendering"
 date: 2021-05-01
 category: "All"
-draft: true
+draft: false
 ---
-
-<br><br>
 
 `참고` 맹기완 대표님의 [코드스피츠](https://www.youtube.com/playlist?list=PLBNdLLaRx_rKXwi7MulM6v1UG9JLKWIYS)를 들으면서 알게된 내용들을 정리한 포스팅입니다.
 
@@ -44,8 +42,6 @@ draft: true
     </div>
   </div>
 
-<br>
-
 ## Float
 
 - `Float`는 BFC나 IFC가 아니라 `Line Box`라는 모델로 그려지며, 기존의 BFC 영역을 파기하고 새로운 BFC 영역을 만들어 기존의 BFC 영역 위에 떠있는 것처럼 렌더링됩니다.
@@ -72,8 +68,6 @@ draft: true
     </div>
   </div>
   
-<br>
-
 - `Line Box`    
   - Line Box는 처음에는 float에 의해 새롭게 생긴 BFC 영역 전체가 되지만, 이후 Float가 차지한 영역만큼씩은 줄어들게 됩니다. 그리고 Float 엘리먼트들은 이 Line Box 영역을 서로 가지며 배치되고, 들어갈 Line Box의 영역보다도 큰 Float 엘리먼트가 존재한다면 해당 Line Box의 하단을 기준으로 빈 공간에 그리게 됩니다.
   - Line Box에서는 left보다 더 왼쪽에 그릴 수 없고, right보다 더 오른쪽에 그릴 수 없습니다. 즉, left와 right 사이에만 그릴 수 있습니다.
@@ -103,13 +97,9 @@ draft: true
         </div>
       </div>
 
-<br>
-
 - `Overflow`
   - `overflow: hidden | scroll`인 경우 새로운 BFC를 만듭니다.  
     그런데 이때 BFC는 Line Box를 경계로 합니다. 즉, 일반적인 BFC는 Line Box에 영향을 받지않고 BFC 영역 전체(부모의 width)의 가로길이를 먹었다면, `overflow: hidden | scroll`을 준 영역은 Line Box를 경계로 하기 때문에 Line Box의 width 만큼만 가로길이를 먹게됩니다.
-
-<br>
 
 ## Position
 
@@ -132,8 +122,6 @@ draft: true
       - `position: static`의 경우: 무시된다.
       - `position: relative`의 경우: Normal Flow로 그린 이후에 거리를 계산한다.
       - `position: absolute`의 경우: offset parent로부터의 거리를 계산한다.
-
-<br>
 
 ## Display Model - Layout
 
@@ -175,7 +163,3 @@ draft: true
           <div style="order:1; text-align: center; color: white; width: 100%; background: blue;">3</div>
         </div>
       </div>
-
-
-<br><br>
- 

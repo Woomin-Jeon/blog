@@ -1,18 +1,16 @@
 ---
-title: "[TypeScript] Utility Type"
+title: "TypeScript Utility Type"
 date: 2021-05-08
 category: "All"
-draft: true
+draft: false
 ---
-
-<br><br>
 
 자주 마주쳤지만 대충 알고 넘어갔던... 하지만 앞으로 자주 사용할 것 같은 TypeScript Utility Type들을 예제 코드와 함께 정리해봤습니다.
 
 <br>
 
 
-### Partial\<T\>
+## Partial\<T\>
 
 T로 들어오는 타입의 프로퍼티들을 옵셔널하게 바꿉니다. 즉, T의 부분집합을 허용하는 타입을 만듭니다.
 
@@ -29,7 +27,7 @@ T로 들어오는 타입의 프로퍼티들을 옵셔널하게 바꿉니다. 즉
   person = { sex: 'male '} // 불가능
   ```
 
-### Readonly\<T\>
+## Readonly\<T\>
 
 T로 들어오는 타입을 읽기전용으로 만듭니다.
 
@@ -44,7 +42,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   person.name = 'min' // 불가능
   ```
 
-### Record<K, T>
+## Record<K, T>
 
 "key: K, value: T"로 하는 객체에 대한 타입을 만듭니다.
 
@@ -65,7 +63,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   }
   ```
 
-### Pick<K, T>
+## Pick<K, T>
 
 타입 K에서 T에 해당하는 프로퍼티만 뽑아서 타입을 만듭니다.
 
@@ -83,7 +81,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   person = { sex: 'male', age: 26 }
   ```
 
-### Omit<K, T>
+## Omit<K, T>
 
 타입 K에서 T에 해당하지 않는 프로퍼티만 뽑아서 타입을 만듭니다. (Pick과 반대개념)
 
@@ -101,7 +99,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   person = { age: 26 }
   ```
 
-### Exclude<T, U>
+## Exclude<T, U>
 
 타입 T에서 U가 가능한 타입을 제거한 타입을 만듭니다.
 
@@ -123,7 +121,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   number = 'ONE' // 불가능
   ```
 
-### Extract<T, U>
+## Extract<T, U>
 
 타입 T에서 U에 해당하는 타입만 뽑아서 타입을 만듭니다. (Exclude와 반대 개념)
 
@@ -145,7 +143,7 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   number = 'THREE' // 불가능
   ```
 
-### NonNullable\<T\>
+## NonNullable\<T\>
 
 타입 T에서 null과 undefined인 타입은 제거한 타입을 만듭니다.
 
@@ -155,6 +153,3 @@ T로 들어오는 타입을 읽기전용으로 만듭니다.
   type ExistingName = NonNullable<Names>
   // type ExistingName = "woo" | "min"
   ```
-
-<br><br><br><br>
- 

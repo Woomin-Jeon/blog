@@ -1,11 +1,9 @@
 ---
-title: "TIL 복습할 내용"
+title: "Note"
 date: 2021-08-29
 category: "All"
 draft: true
 ---
-
-<!-- 08.29까지 작성 -->
 
 ### React Fiber
 
