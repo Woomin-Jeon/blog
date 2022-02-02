@@ -17,6 +17,8 @@ export const Category = ({ categories, category, selectCategory }) => {
     containerRef.current.scroll({ left: targetScollX, top: 0, behavior: 'smooth' })
   }, [containerRef])
 
+  return null // 카테고리 영역 제거
+
   return (
     <ul
       ref={containerRef}
