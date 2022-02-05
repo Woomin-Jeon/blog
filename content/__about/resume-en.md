@@ -6,5 +6,4 @@ lang: 'en'
 
 # 전우민
 
-<div align="center">
-</div>
+모지리 프론트엔드 개발자입니다.
