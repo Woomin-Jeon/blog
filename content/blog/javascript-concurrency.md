@@ -16,7 +16,7 @@ draft: false
   
 JavaScript는 싱글 쓰레드로 구현되어 있기 때문에 동시성으로 일을 처리합니다.
 
-<img src="../images/javascript-flow.png">
+![JavaScript Flow](./images/javascript-flow.png)
 
 먼저 JavaScript engine이 check queue를 확인합니다. check queue에 걸리는 게 있으면 다시 engine work로 돌아와서 rendering 합니다. 만약 check queue에 걸리는 게 없으면 run JS, 즉 우리가 작성한 코드를 실행합니다. 그리고 다시 engine work로 돌아와서 rendering합니다. 다시 JavaScript engine은 chekc queue를 확인하고, 코드를 실행시킵니다. 이러한 순환을 JavaScript는 하나의 쓰레드가 계속 반복합니다. 그렇기 때문에 JavaScript는 동시성입니다.  
   
