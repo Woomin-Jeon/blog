@@ -1,8 +1,8 @@
 module.exports = {
   title: `Woomin`,
-  description: `부족한 부분을 기록하는 노트입니다`,
+  description: `제 부족함을 채우기 위한 여정을 기록합니다`,
   author: `Woomin-Jeon`,
-  introduction: `부족한 부분을 기록합니다`,
+  introduction: `제 부족함을 채우기 위한 여정을 기록합니다`,
   siteUrl: `http://woomin.netlify.app`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
