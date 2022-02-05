@@ -12,6 +12,20 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
           />
+
+          {/* Google Analytics Start */}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3RJK9T1PJ"></script>
+          <script>
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-J3RJK9T1PJ');
+            `}
+          </script>
+          {/* Google Analytics End */}
+
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
