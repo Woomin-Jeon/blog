@@ -121,7 +121,7 @@ function useRecoilValueLoadable(recoilValue) {
 
 이렇게 여러가지 `reactMode`에 대한 `useRecoilValueLoadable` 훅 구현체가 있습니다.
 
-(제가 개발하는 프로젝트의 경우는 `React 17`버전을 사용하고 있고, `Recoil 0.5.2`버전을 사용하고 있었는데, 이 경우에는 `useRecoilValueLoadable_LEGACY` 훅을 사용하게 됩니다)
+(`React 17.0.1`, `Recoil 0.6.0`버전의 경우에는 `useRecoilValueLoadable_LEGACY` 훅을 사용하게 됩니다)
 
 `useRecoilValueLoadable_LEGACY` 훅을 기준으로 조금 더 살펴보면, 
 
