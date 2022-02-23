@@ -97,3 +97,56 @@ Template Literal Types를 이용해서 문자열로 된 것에 대해 유연한�
   type Result = Split<Test, '.'> // ["aaa", "bbb", "ccc", "ddd", "eee"]
   
   ```
+
+<br><br><br><br><br>
+
+# (번외) 내가 쓰려고 만든 Utility Types
+
+### Split  
+
+string을 split해서 튜플타입으로 만들기
+ 
+  ```ts
+  type Split<S, D extends string>
+    = S extends `${infer F}${D}${infer R}` ? [F, ...Split<R, D>] : [S]
+  
+  type Result = Split<'hello,world,good', ','> // ['hello', 'world', 'good']
+  ```
+
+### Trim
+
+string의 양옆 공백이 제거된 string 타입을 만들기
+
+  ```ts
+  type TrimStart<S>
+    = S extends ` ${infer V}` ? TrimStart<V> : S
+  type TrimEnd<S>
+    = S extends `${infer V} ` ? TrimEnd<V> : S
+ 
+  type Trim<S> = TrimStart<TrimEnd<S>>
+ 
+  type Result = Trim<'   hello  '> // 'hello'
+  ```
+
+### Replace
+
+string에서 특정 문자가 변경된 string 타입을 만들기
+  
+  ```ts
+  type Replace<S, From extends string, To extends string> 
+    = S extends `${infer A}${From}${infer B}` ? Replace<`${A}${To}${B}`, From, To> : S
+
+  type Result = Replace<'hello,world,good', ',', '-'> // 'hello-world-good'
+  ```
+
+### UnpackTuple
+
+튜플 내부의 type들에 대해 unpack된 타입을 만들기
+
+```ts
+type Pack<T> = { data: T }
+
+type UnpackTuple<T> = T extends [Pack<infer U>, ...infer Rest] ? [U, ...UnpackTuple<Rest>] : []
+
+type Result = UnpackTuple<[Pack<string>, Pack<number>, Pack<boolean>]> // [string, number, boolean]
+```
