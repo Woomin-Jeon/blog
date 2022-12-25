@@ -276,3 +276,11 @@ aws cloudfront create-invalidation \
 - 배포 이후 최초의 유저가 도메인에 접근하면 CDN에 캐시된 데이터가 없으므로 오리진 서버를 통해 `index.html(main.2.js)`를 불러옵니다. 그리고 역시 오리진 서버를 통해 `main.2.js`를 불러옵니다.
 - 이후 다른 유저가 다시 도메인에 접근하거나 새로고침을 한다면 CDN에 캐싱된 `index.html(main.2.js)`를 불러오고 `main.2.js`를 CDN을 통해 불러오고 브라우저 캐시에 저장합니다.
 - 이후 다시 도메인에 접근할 때는 CDN에 캐싱된 `index.html(main.2.js)`를 불러오고, 브라우저에 캐시된 `main.2.js`를 사용해서 빠르게 화면에 내용을 보여줍니다.
+
+<br/><br/>
+
+---
+
+<br/><br/>
+
+위와 같은 일련의 과정을 코드화 한 [Terraform 레포지토리 링크](https://github.com/Woomin-Jeon/s3-cf-deploy-terraform)입니다.
