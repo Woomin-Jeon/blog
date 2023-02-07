@@ -61,6 +61,28 @@ type Result = Join<['hello', 'world', string], '/'> // `/hello/world/${string}`
 
 # Tuple 관련
 
+### Filter
+
+튜플에서 특정 타입을 남기거나 제거하기
+
+```ts
+type RemainFilter<A extends unknown[], T> = A extends [infer E, ...(infer Rest)]
+  ? E extends T
+    ? [E, ...RemainFilter<Rest, T>]
+    : RemainFilter<Rest, T>
+  : []
+type RemoveFilter<A extends unknown[], T> = A extends [infer E, ...(infer Rest)]
+  ? E extends T
+    ? RemoveFilter<Rest, T>
+    : [E, ...RemoveFilter<Rest, T>]
+  : []
+
+type Tuple = [number, 'hello', string, null, '']
+
+type Result1 = RemainFilter<Tuple, string> // ['hello', string, '']
+type Result2 = RemoveFilter<Tuple, '' | null> // [number, 'hello', string]
+```
+
 ### TupleToUnion
 
 튜플을 Union 타입으로 만들기
