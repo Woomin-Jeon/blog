@@ -106,3 +106,57 @@ type UnpackTuple<T> = T extends [Pack<infer U>, ...(infer Rest)]
 
 type Result = UnpackTuple<[Pack<string>, Pack<number>, Pack<boolean>]> // [string, number, boolean]
 ```
+
+# Array 관련
+
+### UnpackArray
+
+Array 타입 내부의 값을 타입으로 뽑아내기
+
+```ts
+type UnpackArray<A extends any[]> = A[0]
+
+type Result = UnpackArray<string[]> // string
+```
+
+### ArrayToRecord
+
+Array 타입을 Record 타입으로 만들기
+
+```ts
+type ArrayToRecord<
+  A extends Record<string, any>[],
+  Key extends keyof A[0]
+> = A extends [infer U, ...(infer Rest)]
+  ? U extends UnpackArray<A>
+    ? U[Key] extends string | number | symbol
+      ? Rest extends Record<string, any>[]
+        ? { [k in U[Key]]: U } & ArrayToRecord<Rest, Key>
+        : {}
+      : {}
+    : {}
+  : {}
+
+type Result = ArrayToRecord<
+  [
+    { id: 'a'; name: 'woo' },
+    { id: 'b'; name: 'min' },
+    { id: 'c'; name: 'hello' }
+  ],
+  'id'
+>
+// {
+//   a: {
+//     id: 'a';
+//     name: 'woo;
+//   } &
+//   b: {
+//     id: 'b';
+//     name: 'min;
+//   } &
+//   c: {
+//     id: 'c';
+//     name: 'hello;
+//   }
+// }
+```
