@@ -93,6 +93,31 @@ type TupleToUnion<A extends unknown[]> = A[number]
 type Result = TupleToUnion<['hello', boolean, number]> // 'hello' | boolean | number
 ```
 
+### TupleToMap
+
+튜플을 객체 타입으로 만들기
+
+```ts
+type Tuple = readonly [
+  { id: '1', age: 10 },
+  { id: '2', age: 20 },
+  { id: '3', age: 30 },
+]
+
+type TupleToMap<
+  A extends readonly unknown[],
+  K extends keyof A[0],
+  V extends keyof A[0] | 'whole' = 'whole' // id, age, whole
+> = A extends readonly [infer E, ...infer Rest]
+  ? E[K] extends string | number | symbol
+    ? { [k in E[K]]: V extends 'whole' ? E : V extends keyof E ? E[V] : never } & TupleToMap<Rest, K, V>
+    : {}
+  : {}
+
+type Result = TupleToMap<Tuple, 'id'> // { '1': { id: '1', age: 10 }, '2': { id: '2', age: 20 }, '3': { id: '3', age: 30 } }
+type Result = TupleToMap<Tuple, 'age'> // { 10: { id: '1', age: 10 }, 20: { id: '2', age: 20 }, 20: { id: '3', age: 30 } }
+```
+
 ### UnpackTuple
 
 튜플 내부의 type들에 대해 unpack된 타입을 만들기
@@ -105,6 +130,26 @@ type UnpackTuple<T> = T extends [Pack<infer U>, ...(infer Rest)]
   : []
 
 type Result = UnpackTuple<[Pack<string>, Pack<number>, Pack<boolean>]> // [string, number, boolean]
+```
+
+### FindInTuple
+
+튜플 내부에서 key와 value에 해당하는 타입 찾기
+
+```ts
+type Tuple = readonly [
+  { id: '1', age: 10 },
+  { id: '2', age: 20 },
+  { id: '3', age: 30 },
+]
+
+type FindInTuple<A extends Readonly<unknown[]>, K extends keyof A[0], V> = A extends readonly [infer U, ...infer Rest]
+  ? U[K] extends V
+    ? U
+    : FindInTuple<Rest, K, V>
+  : never
+
+type Result = FindInTuple<Tuple, 'id', '3'> // { id: '3', age: 30 }
 ```
 
 # Array 관련
